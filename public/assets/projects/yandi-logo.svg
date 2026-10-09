@@ -1,0 +1,8 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <title>研递 Research Dispatch</title>
+  <desc>一本展开的书，右页延伸为向前递送的箭头</desc>
+  <rect width="48" height="48" rx="14" fill="#5B6FEF"/>
+  <path id="left-page" d="M10.5 13.5C15.4 12.4 19.8 13.7 24 17.2V35.8C20.2 32.8 15.6 31.9 10.5 33V13.5Z" stroke="white" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path id="right-page" d="M24 17.2C28.2 13.7 32.6 12.4 37.5 13.5V23.7" stroke="white" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path id="dispatch" d="M24 35.8C27.6 32.9 30.1 31.5 33.7 31.5H39M35.8 27.7L39.7 31.6L35.8 35.5" stroke="#65E1D5" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

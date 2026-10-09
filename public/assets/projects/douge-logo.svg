@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="520" viewBox="0 0 520 520" role="img" aria-labelledby="icon-title icon-desc">
+  <title id="icon-title">拼豆岛图标</title>
+  <desc id="icon-desc">一颗俯视拼豆，中央负形是一座海岛与波浪。</desc>
+  <defs>
+    <path id="island-shape" d="M160 86C184 86 195 108 205 130C215 150 239 152 253 170C271 194 260 223 232 237C191 257 134 254 96 231C70 216 69 187 87 169C100 156 119 151 128 132C140 106 146 86 160 86Z"/>
+    <mask id="icon-cutout" maskUnits="userSpaceOnUse" x="0" y="0" width="320" height="320">
+      <rect width="320" height="320" fill="white"/>
+      <use href="#island-shape" fill="black"/>
+    </mask>
+    <clipPath id="icon-island-clip">
+      <use href="#island-shape"/>
+    </clipPath>
+  </defs>
+  <g id="mark" transform="translate(100 92)">
+    <path id="mark-shell" fill="#105873" mask="url(#icon-cutout)" d="M160 18C99 18 58 24 34 60C14 91 14 229 34 260C58 296 99 302 160 302C221 302 262 296 286 260C306 229 306 91 286 60C262 24 221 18 160 18Z"/>
+    <path id="mark-wave" fill="#35B7A3" clip-path="url(#icon-island-clip)" d="M78 205C112 233 149 231 178 212C207 193 236 195 263 218L263 274L78 274Z"/>
+  </g>
+</svg>
