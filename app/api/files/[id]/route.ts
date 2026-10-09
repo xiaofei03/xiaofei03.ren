@@ -1,0 +1,4 @@
+import { findPost,bucket,isEditor } from "@/app/post-store";
+import { getChatGPTUser } from "@/app/chatgpt-auth";
+export const dynamic="force-dynamic";
+export async function GET(_:Request,{params}:{params:Promise<{id:string}>}){try{const {id}=await params;const canEdit=isEditor(await getChatGPTUser());const post=await findPost(id,canEdit);if(!post?.attachmentKey)return new Response("文件不存在",{status:404});const file=await bucket().get(post.attachmentKey);if(!file)return new Response("文件不存在",{status:404});const pdf=post.attachmentName?.toLowerCase().endsWith('.pdf');return new Response(file.body,{headers:{"Content-Type":pdf?"application/pdf":"application/octet-stream","Content-Disposition":`${pdf?'inline':'attachment'}; filename*=UTF-8''${encodeURIComponent(post.attachmentName||'article')}`,"X-Content-Type-Options":"nosniff","Cache-Control":"private, no-store"}});}catch{return new Response("文件暂时无法读取",{status:503});}}

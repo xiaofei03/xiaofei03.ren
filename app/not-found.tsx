@@ -1,0 +1,1 @@
+export default function NotFound(){return <main className="journal-page"><div className="article-container"><p className="eyebrow">404</p><h1>这页笔记还没找到。</h1><a className="text-link" href="/notes">回到随笔</a></div></main>;}

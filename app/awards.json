@@ -1,0 +1,146 @@
+[
+  {
+    "id": "innovation",
+    "title": "第七届全国大学生创新体验竞赛",
+    "prize": "创业计划一等奖",
+    "year": "2024",
+    "category": "国家级",
+    "image": "/assets/certificates/innovation.webp"
+  },
+  {
+    "id": "water",
+    "title": "北控水务杯第六届生态环境创新创业大赛",
+    "prize": "银奖",
+    "year": "2023",
+    "category": "国家级",
+    "image": "/assets/certificates/water.webp"
+  },
+  {
+    "id": "challenge",
+    "title": "第十八届挑战杯 · 黑科技展示活动",
+    "prize": "卫星级作品（三等奖）",
+    "year": "2023",
+    "category": "国家级",
+    "image": "/assets/certificates/challenge.webp"
+  },
+  {
+    "id": "annual",
+    "title": "第八届河北省大学生创新创业年会",
+    "prize": "成果展示项目一等奖",
+    "year": "2023",
+    "category": "省级",
+    "image": "/assets/certificates/annual.webp"
+  },
+  {
+    "id": "creative",
+    "title": "第八届河北省大学生创新创业年会",
+    "prize": "最佳创意项目",
+    "year": "2023",
+    "category": "省级",
+    "image": "/assets/certificates/creative.webp"
+  },
+  {
+    "id": "internet",
+    "title": "第九届河北省互联网＋创新创业大赛",
+    "prize": "高教主赛道银奖",
+    "year": "2023",
+    "category": "省级",
+    "image": "/assets/certificates/internet.webp"
+  },
+  {
+    "id": "challenge-hebei",
+    "title": "挑战杯河北省课外学术科技作品竞赛",
+    "prize": "二等奖",
+    "year": "2023",
+    "category": "省级",
+    "image": "/assets/certificates/challenge-hebei.webp"
+  },
+  {
+    "id": "commerce",
+    "title": "第十三届全国大学生电子商务三创赛",
+    "prize": "河北省选拔赛三等奖",
+    "year": "2023",
+    "category": "省级",
+    "image": "/assets/certificates/commerce.webp"
+  },
+  {
+    "id": "english",
+    "title": "第二届外教社·词达人杯词汇能力大赛",
+    "prize": "全国决赛二等奖",
+    "year": "2022",
+    "category": "国家级",
+    "image": "/assets/certificates/english.webp"
+  },
+  {
+    "id": "scholarship",
+    "title": "本专科生国家奖学金",
+    "prize": "2021—2022 学年度",
+    "year": "2022",
+    "category": "奖学金",
+    "image": "/assets/certificates/scholarship.webp"
+  },
+  {
+    "id": "inspiration",
+    "title": "国家励志奖学金",
+    "prize": "2022—2023 学年度",
+    "year": "2023",
+    "category": "奖学金",
+    "image": "/assets/certificates/inspiration.webp"
+  },
+  {
+    "id": "innovation-scholarship",
+    "title": "创新创业奖学金",
+    "prize": "东北大学秦皇岛分校",
+    "year": "2023",
+    "category": "奖学金",
+    "image": "/assets/certificates/innovation-scholarship.webp"
+  },
+  {
+    "id": "student-model",
+    "title": "校级三好学生标兵",
+    "prize": "2021—2022 学年度",
+    "year": "2022",
+    "category": "学生荣誉",
+    "image": "/assets/certificates/student-model.webp"
+  },
+  {
+    "id": "student",
+    "title": "校级三好学生",
+    "prize": "2022—2023 学年度",
+    "year": "2023",
+    "category": "学生荣誉",
+    "image": "/assets/certificates/student.webp"
+  },
+  {
+    "id": "leader",
+    "title": "创新创业工作优秀学生干部",
+    "prize": "东北大学秦皇岛分校",
+    "year": "2022",
+    "category": "学生荣誉",
+    "image": "/assets/certificates/leader.webp"
+  },
+  {
+    "id": "practice-2022",
+    "title": "暑期社会实践先进个人",
+    "prize": "文化科技卫生三下乡",
+    "year": "2022",
+    "category": "实践荣誉",
+    "image": "/assets/certificates/practice-2022.webp"
+  },
+  {
+    "id": "practice-2023",
+    "title": "暑期社会实践先进个人",
+    "prize": "文化科技卫生三下乡",
+    "year": "2023",
+    "category": "实践荣誉",
+    "image": "/assets/certificates/practice-2023.webp"
+  },
+  {
+    "id": "volunteer-team",
+    "title": "暑期社会实践先进小分队",
+    "prize": "北京光爱学校小葵花向阳队",
+    "year": "2023",
+    "category": "实践荣誉",
+    "image": "/assets/certificates/volunteer-team.webp"
+  }
+]
