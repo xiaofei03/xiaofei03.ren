@@ -92,3 +92,30 @@
 .journal-portrait-motion .journal-handwriting { bottom: -30px; }
 .menubar nav>a { padding: 8px 0; color: #203147; }
 .menubar nav>a:hover { color: #1760ee; }
+
+/* Keep the desktop's introduction/portrait composition on narrow screens. */
+@media(max-width:800px){
+ .home-hero{padding-left:5%;padding-right:5%;gap:26px}
+ .hero-main{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:12px;align-items:center;max-width:700px}
+ .hero-left{display:block;min-width:0}
+ .hero-orbit{min-width:0;align-self:center}
+ .hero-orbit .hero-figure{width:calc(100% + 12px);max-width:300px;margin:0 0 0 auto}
+ .hero-greeting{font-size:13px;line-height:1.7;margin-bottom:10px;letter-spacing:0}
+ .hero-name h1{font-size:clamp(40px,12.2vw,80px)}
+ .hero-name h1>.hero-roman{font-size:clamp(20px,5.6vw,29px);margin:10px 0 16px;letter-spacing:.015em}
+ .hero-identity{font-size:12px;gap:8px;margin-bottom:16px}
+ .hero-identity>span{padding:6px 8px;white-space:nowrap}
+ .hero-description{font-size:13px;line-height:1.85;margin-bottom:18px}
+ .hero-primary{min-height:44px;padding:10px 14px;font-size:13px;gap:12px;white-space:nowrap}
+ .hero-primary svg{width:17px;height:17px;flex-shrink:0}
+ .hero-orbit .hero-signature{left:4%;bottom:0;font-size:clamp(10px,2.7vw,13px);padding:8px 9px;gap:5px}
+ .hero-signature svg{width:12px;height:12px}
+ .hero-footer{right:5%}
+}
+@media(min-width:540px) and (max-width:800px){
+ .hero-main{gap:24px}
+ .hero-greeting{font-size:16px}
+ .hero-identity{font-size:13px}
+ .hero-description{font-size:15px}
+ .hero-primary{font-size:14px;padding:12px 18px}
+}
