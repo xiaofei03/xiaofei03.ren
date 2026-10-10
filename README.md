@@ -10,6 +10,8 @@ Elliot Hu 的个人桌面与拼贴风格是视觉参考。本项目是重新实�
 - 可关闭、收起、放大的桌面窗口；电脑端支持拖动标题栏。
 - 独立随笔列表与文章页，分类筛选、搜索与基础 Markdown 排版。
 - 首页中文名字使用 React Bits Tech Text：虚线轮廓、选框、粒子、拖动回弹和自动扫过；沿用中文宋体与 Sofian Sun 英文签名。触屏与减少动态效果模式保持稳定文字，页面隐藏或文字离开视口时暂停。
+- 首页天空有缓慢飘云和轻微景深跟随；打开内容窗口、页面隐藏或首页离开视口时暂停，减少动态效果时显示静态云。
+- 全站鼠标流体光迹：蓝、紫、青与暖金渐变，会随移动翻卷，点击有小幅扩散；公共布局覆盖桌面窗口、AI 实验室、独立随笔、文章与工作室。保留原生指针和点击穿透，触屏与减少动态效果关闭；空闲、页面隐藏、滚动及编辑文字时清空并停止渲染。
 - 支持手机布局与减少动态效果设置。
 
 ## 写作工作室
@@ -62,3 +64,7 @@ node --import ./scripts/sites-env.mjs ./node_modules/wrangler/bin/wrangler.js d1
 ## 文字组件来源
 
 `components/TechText.tsx` 基于 [React Bits Tech Text](https://reactbits.dev/text-animations/tech-text)，上游提交 `d86fccbd477786f94ca7eb891fbe0ec039d3cd3b`。不新增运行依赖；本站增加中文自适应、语义标题与首帧文字回退、触屏滚动和动态效果偏好适配。许可证与版权声明保留在 `licenses/react-bits-LICENSE.md`（MIT + Commons Clause）。
+
+`components/FluidCursor.tsx` 基于 [React Bits Splash Cursor](https://reactbits.dev/animations/splash-cursor)，已实际阅读上游 `c1c460e6676407bc9eefd951b03941ed1046eaac` 的完整 TypeScript 流体模拟与着色器，并通过 `npx shadcn@latest view @react-bits/SplashCursor-TS-CSS` 核对注册源码（无额外运行依赖）。`PointerAtmosphere.tsx` 在公共布局按设备与动态效果偏好延迟加载。本站增加主题配色、空闲/隐藏/编辑暂停、GPU 分辨率上限、重置与清理，修正上游默认帧缓冲叠绘及尺寸调整时的资源释放。版权和许可同上。候选 Ribbons、Aurora 与最终 Splash Cursor 的源码、注册文件和验收记录保存在项目 `work/sky-motion-2026-10-10/`。
+
+`public/assets/home-v2/sky-cloud.webp` 为本项目使用内置图像工具生成的透明云素材，经尺寸与 WebP 格式优化；原图、完整提示词、来源记录和验收文件保存在项目 `work/sky-motion-2026-10-10/`。

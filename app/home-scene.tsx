@@ -3,6 +3,7 @@ import {useEffect,useRef} from "react";
 import {ArrowDown,ArrowUpRight,BookOpen,ChevronRight,FlaskConical,Sparkles,UserRound} from "lucide-react";
 import {labProjects} from "./project-data";
 import TechText from "@/components/TechText";
+import SkyScene from "@/components/SkyScene";
 import "./home-scene.css";
 
 
@@ -17,7 +18,7 @@ const paths=[
  {id:"practice",title:"志愿实践",description:"走出自己的世界，认识更多的人",number:"05"}
 ];
 
-export default function HomeScene({open}:{open:(id:string,project?:string)=>void}){
+export default function HomeScene({open,motionPaused=false}:{open:(id:string,project?:string)=>void;motionPaused?:boolean}){
  const root=useRef<HTMLDivElement>(null);
  useEffect(()=>{
   let cancelled=false;let dispose=()=>{};
@@ -75,6 +76,7 @@ export default function HomeScene({open}:{open:(id:string,project?:string)=>void
  },[]);
  return <div className="home-scene" ref={root}>
   <section className="home-hero" aria-label="认识孙烁飞">
+   <SkyScene paused={motionPaused}/>
    <div className="scene-paper-grid" aria-hidden="true"/>
    <div className="hero-topline"><span><Sparkles size={17}/>一个关于我，也关于好奇心的地方</span></div>
     <div className="orbit-wire"><svg className="scene-orbit-line" viewBox="0 0 1260 300" fill="none" aria-hidden="true">

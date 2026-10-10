@@ -1,0 +1,20 @@
+.pointer-atmosphere {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  pointer-events: none;
+  overflow: hidden;
+  contain: strict;
+  mix-blend-mode: multiply;
+}
+.pointer-atmosphere canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 220ms ease;
+}
+@media (prefers-reduced-motion: reduce), (hover: none) and (pointer: coarse) {
+  .pointer-atmosphere { display: none; }
+}

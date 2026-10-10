@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
+import PointerAtmosphere from "@/components/PointerAtmosphere";
 
 export const metadata: Metadata = {
   title: "孙烁飞 · 一张不断生长的桌面",
@@ -18,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="zh-CN">
-      <body className="antialiased">{children}<Toaster position="bottom-right"/></body>
+      <body className="antialiased">{children}<PointerAtmosphere /><Toaster position="bottom-right"/></body>
     </html>
   );
 }

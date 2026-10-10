@@ -1,0 +1,54 @@
+.sky-scene {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  --sky-shift-x: 0px;
+  --sky-shift-y: 0px;
+}
+
+.sky-clouds {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  mask-image: linear-gradient(#000 0%, #000 65%, transparent 100%);
+}
+
+.sky-cloud {
+  position: absolute;
+  left: calc(-1 * var(--cloud-size));
+  width: var(--cloud-size);
+  animation: sky-wind var(--cloud-duration) linear infinite;
+  animation-delay: var(--cloud-delay);
+  animation-play-state: paused;
+  will-change: transform;
+}
+
+.sky-cloud-near { --cloud-size: clamp(280px, 36vw, 560px); --cloud-duration: 240s; --cloud-delay: -85s; top: 7%; opacity: .63; }
+.sky-cloud-far { --cloud-size: clamp(230px, 25vw, 370px); --cloud-duration: 310s; --cloud-delay: -188s; top: 26%; opacity: .38; }
+.sky-cloud-high { --cloud-size: clamp(300px, 33vw, 500px); --cloud-duration: 270s; --cloud-delay: -220s; top: 3%; opacity: .55; }
+.sky-cloud-wisp { --cloud-size: clamp(220px, 24vw, 350px); --cloud-duration: 365s; --cloud-delay: -105s; top: 60%; opacity: .22; }
+.sky-cloud-parallax { transform: translate3d(var(--sky-shift-x), var(--sky-shift-y), 0); }
+.sky-cloud img { display: block; width: 100%; height: auto; user-select: none; }
+.sky-cloud-mirror { transform: scaleX(-1); }
+.sky-scene[data-running="true"] .sky-cloud { animation-play-state: running; }
+
+@keyframes sky-wind {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(calc(100vw + var(--cloud-size)), 0, 0); }
+}
+
+@media (max-width: 800px) {
+  .sky-cloud-near { top: 5%; opacity: .5; }
+  .sky-cloud-far { top: 36%; opacity: .27; }
+  .sky-cloud-high { top: 20%; opacity: .4; }
+  .sky-cloud-wisp { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sky-cloud { animation: none !important; will-change: auto; }
+  .sky-cloud-near { left: 10%; }
+  .sky-cloud-far { left: 59%; }
+  .sky-cloud-high { left: 79%; }
+  .sky-cloud-wisp { left: 24%; }
+  .sky-cloud-parallax { transform: none !important; }
+}
