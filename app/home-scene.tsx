@@ -1,6 +1,6 @@
 "use client";
 import {useEffect,useRef} from "react";
-import {ArrowDown,ArrowUpRight,BookOpen,BriefcaseBusiness,ChevronRight,FlaskConical,HeartHandshake,Sparkles,UserRound} from "lucide-react";
+import {ArrowDown,ArrowUpRight,BookOpen,ChevronRight,FlaskConical,Sparkles,UserRound} from "lucide-react";
 import {labProjects} from "./project-data";
 import "./home-scene.css";
 
@@ -80,12 +80,12 @@ export default function HomeScene({open}:{open:(id:string,project?:string)=>void
      <defs><filter id="cord-shadow" x="-10%" y="-20%" width="120%" height="150%"><feDropShadow dx="0" dy="2" stdDeviation="1.7" floodColor="#24435c" floodOpacity=".24"/></filter></defs>
      <g filter="url(#cord-shadow)"><path d={cordPath} stroke="#8b7351" strokeWidth="5.5"/><path d={cordPath} stroke="#e2cdab" strokeWidth="4"/><path d={cordPath} stroke="#aa8d66" strokeWidth="3.5" strokeDasharray="1 4"/><path d={cordPath} stroke="#f0e1c8" strokeWidth=".8"/></g>
     </svg><span className="cord-nail cord-nail-left" aria-hidden="true"/><span className="cord-nail cord-nail-right" aria-hidden="true"/>
-    {[0,1,2].map(row=><div className="mobile-cord-row" key={row} aria-hidden="true"><svg viewBox="0 0 100 24" preserveAspectRatio="none" fill="none"><path d="M 0 2 Q 50 21 100 2" stroke="#8b7351" strokeWidth="1.6"/><path d="M 0 2 Q 50 21 100 2" stroke="#e2cdab" strokeWidth="1"/><path d="M 0 2 Q 50 21 100 2" stroke="#aa8d66" strokeWidth=".8" strokeDasharray=".3 1.2"/><path d="M 0 2 Q 50 21 100 2" stroke="#f0e1c8" strokeWidth=".2"/></svg></div>)}
+    {[0,1].map(row=><div className="mobile-cord-row" key={row} aria-hidden="true"><svg viewBox="0 0 100 24" preserveAspectRatio="none" fill="none"><path d="M 0 2 Q 50 21 100 2" stroke="#8b7351" strokeWidth="1.6"/><path d="M 0 2 Q 50 21 100 2" stroke="#e2cdab" strokeWidth="1"/><path d="M 0 2 Q 50 21 100 2" stroke="#aa8d66" strokeWidth=".8" strokeDasharray=".3 1.2"/><path d="M 0 2 Q 50 21 100 2" stroke="#f0e1c8" strokeWidth=".2"/></svg></div>)}
     <nav className="scene-orbit-nav" aria-label="探索我的各个方面">
-     <div className="scene-object scene-practice scene-enter orbit-entry"><div className="scene-depth"><div className="scene-drift"><div className="orbit-hanger"><button onClick={()=>open("practice")} aria-label="打开志愿实践"><div className="orbit-symbol"><HeartHandshake size={37}/></div><span>志愿实践 <ArrowUpRight size={14}/></span></button></div></div></div></div>
-     <div className="scene-object scene-experience scene-enter orbit-entry"><div className="scene-depth"><div className="scene-drift"><div className="orbit-hanger"><button onClick={()=>open("experience")} aria-label="打开实习经历"><div className="orbit-symbol"><BriefcaseBusiness size={37}/></div><span>实习经历 <ArrowUpRight size={14}/></span></button></div></div></div></div>
+     <div className="scene-object scene-practice scene-enter orbit-entry"><div className="scene-depth"><div className="scene-drift"><div className="orbit-hanger"><button onClick={()=>open("practice")} aria-label="打开志愿实践"><img className="scene-cutout" src="/assets/home-v2/practice-heart.webp" alt="立体红色爱心" width={320} height={320}/><span>志愿实践 <ArrowUpRight size={14}/></span></button></div></div></div></div>
+     <div className="scene-object scene-experience scene-enter orbit-entry"><div className="scene-depth"><div className="scene-drift"><div className="orbit-hanger"><button onClick={()=>open("experience")} aria-label="打开实习经历"><img className="scene-cutout" src="/assets/home-v2/experience-work.webp" alt="立体皮质手提箱" width={320} height={320}/><span>实习经历 <ArrowUpRight size={14}/></span></button></div></div></div></div>
      <div className="scene-object scene-trophy scene-enter orbit-entry"><div className="scene-depth"><div className="scene-drift"><div className="orbit-hanger"><button onClick={()=>open("awards")} aria-label="打开荣誉收藏"><img src="/assets/home-v2/trophy.webp" alt="装饰奖杯" width={362} height={480}/><span>荣誉收藏 <ArrowUpRight size={14}/></span></button></div></div></div></div>
-     <div className="scene-object scene-research scene-enter orbit-entry"><div className="scene-depth"><div className="scene-drift"><div className="orbit-hanger"><button onClick={()=>open("research")} aria-label="打开研究手记"><div className="orbit-symbol"><FlaskConical size={37}/></div><span>研究手记 <ArrowUpRight size={14}/></span></button></div></div></div></div>
+     <div className="scene-object scene-research scene-enter orbit-entry"><div className="scene-depth"><div className="scene-drift"><div className="orbit-hanger"><button onClick={()=>open("research")} aria-label="打开研究手记"><img className="scene-cutout" src="/assets/home-v2/research-lens.webp" alt="立体蓝色放大镜" width={320} height={320}/><span>研究手记 <ArrowUpRight size={14}/></span></button></div></div></div></div>
      <div className="scene-object scene-ai scene-enter orbit-entry"><div className="scene-depth"><div className="scene-drift"><div className="orbit-hanger"><button onClick={()=>open("projects")} aria-label="打开 AI 实验室"><div className="scene-ai-mark"><img src="/assets/home-v2/chatgpt-mark.svg" alt="ChatGPT 标志" width={80} height={80}/></div><span>AI 实验室 <ArrowUpRight size={14}/></span></button></div></div></div></div>
      <div className="scene-object scene-notebook scene-enter orbit-entry"><div className="scene-depth"><div className="scene-drift"><div className="orbit-hanger"><button onClick={()=>open("notes")} aria-label="打开随笔"><img src="/assets/notebook-cobalt.webp" alt="蓝色笔记本与铅笔"/><span>随笔 <ArrowUpRight size={14}/></span></button></div></div></div></div>
      <div className="scene-object scene-school scene-enter orbit-entry"><div className="scene-depth"><div className="scene-drift"><div className="orbit-hanger"><button onClick={()=>open("education")} aria-label="打开求学时光"><img src="/assets/ustc-seal.png" alt="中国科学技术大学校徽"/><span>求学时光 <ArrowUpRight size={14}/></span></button></div></div></div></div>
@@ -93,7 +93,7 @@ export default function HomeScene({open}:{open:(id:string,project?:string)=>void
    <div className="hero-main"><div className="hero-left">
    <div className="hero-title">
     <p className="hero-greeting hero-title-line">你好，很高兴认识你。</p>
-    <div className="hero-name"><h1 className="hero-title-line">孙烁飞<span>Shuofei Sun</span></h1></div>
+    <div className="hero-name"><h1 className="hero-title-line">孙烁飞<span>Sofian Sun</span></h1></div>
     <div className="hero-identity hero-title-line"><span>管理学 × AI</span><span>中国科学技术大学</span></div>
     <p className="hero-description hero-title-line">在数据里寻找答案，<br/>在生活里收集问题。</p>
     <div className="hero-primary-enter hero-title-line"><button className="hero-primary" onClick={()=>open("about")}>从这里认识我 <ArrowUpRight size={20}/></button></div>
