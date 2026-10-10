@@ -58,8 +58,7 @@ export default function HomeScene({open,motionPaused=false}:{open:(id:string,pro
     const work=host.querySelector(".home-work")!;
     gsap.from(".home-project",{scrollTrigger:{trigger:work,start:"top 80%",once:true},y:28,opacity:0,stagger:.12,duration:.7,ease:"power3.out"});
     gsap.fromTo(".home-project-image",{clipPath:"inset(0% 0% 100% 0%)"},{scrollTrigger:{trigger:work,start:"top 80%",once:true},clipPath:"inset(0% 0% 0% 0%)",stagger:.12,duration:.9,ease:"power3.inOut"});
-    gsap.fromTo(".journal-portrait-motion",{xPercent:-110,rotation:70,opacity:0,transformOrigin:"0% 100%"},{scrollTrigger:{trigger:host.querySelector(".journal-portrait"),start:"top 88%",once:true},xPercent:0,rotation:0,opacity:1,duration:2,ease:"sine.inOut"});
-    gsap.fromTo(".journal-handwriting",{y:28,rotation:-8,opacity:0},{scrollTrigger:{trigger:host.querySelector(".home-journal"),start:"top 82%",once:true},y:0,rotation:0,opacity:1,delay:.25,duration:.75,ease:"back.out(1.25)"});
+    gsap.fromTo(".journal-portrait-motion",{opacity:0},{scrollTrigger:{trigger:host.querySelector(".journal-portrait"),start:"top 88%",once:true},opacity:1,duration:2,ease:"sine.inOut"});
     if(!desktop||!matchMedia("(pointer:fine)").matches)return cleanupScroll;
     const drift=Array.from(host.querySelectorAll<HTMLElement>(".hero-figure .scene-drift"));
     const motions=drift.map((el,i)=>({x:gsap.quickTo(el,"x",{duration:.8,ease:"power3.out"}),y:gsap.quickTo(el,"y",{duration:.8,ease:"power3.out"}),weight:[11,-15,9,-10,13][i]||8}));
@@ -120,6 +119,6 @@ export default function HomeScene({open,motionPaused=false}:{open:(id:string,pro
    <div className="home-projects">{labProjects.slice(0,3).map(p=><button key={p.id} className="home-project" data-project={p.id} onClick={()=>open("projects",p.id)}><div className="home-project-image"><img src={p.cover} alt={`${p.name}工作流`} loading="lazy"/></div><div className="home-project-name"><h3>{p.name}</h3><ArrowUpRight size={22}/></div><p>{p.summary}</p></button>)}</div>
   </section>
   <section className="home-journal" aria-labelledby="home-journal-title"><div className="journal-portrait"><div className="journal-portrait-motion"><img src="/assets/home-v2/avatar-front.webp" alt="孙烁飞的正面插画头像" width={581} height={640}/><span className="journal-handwriting">记录，也是一种探索。</span></div></div><div className="home-journal-copy"><span className="section-kicker"><BookOpen size={17}/>随笔</span><h2 id="home-journal-title">给生活和想法，<br/>留一点空白。</h2><p>研究之外，也想记下阅读、旅行和日常里那些值得停一停的瞬间。</p><a className="home-inline-link" href="/notes">翻翻我的随笔 <ChevronRight size={19}/></a></div></section>
-  <footer className="home-page-footer"><span>孙烁飞 · 一张不断生长的桌面</span><a href="mailto:sunshuofei@mail.ustc.edu.cn">聊点有意思的 <ArrowUpRight size={16}/></a></footer>
+  <footer className="home-page-footer"><span>日光之间 · 记录好奇，慢慢生长</span><a href="mailto:sunshuofei@mail.ustc.edu.cn">聊点有意思的 <ArrowUpRight size={16}/></a></footer>
  </div>;
 }

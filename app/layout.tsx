@@ -4,8 +4,19 @@ import { Toaster } from "@/components/ui/sonner";
 import PointerAtmosphere from "@/components/PointerAtmosphere";
 
 export const metadata: Metadata = {
-  title: "孙烁飞 · 一张不断生长的桌面",
+  title: "日光之间",
   description: "中国科学技术大学工商管理硕士。这里放着我的求学经历、研究、项目、荣誉和随笔。",
+  openGraph: {
+    title: "日光之间",
+    description: "在日光之间，记录求学、研究、项目与生活里的好奇心。",
+    type: "website",
+    locale: "zh_CN",
+  },
+  twitter: {
+    card: "summary",
+    title: "日光之间",
+    description: "在日光之间，记录求学、研究、项目与生活里的好奇心。",
+  },
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",

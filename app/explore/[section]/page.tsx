@@ -4,7 +4,7 @@ import SectionPage from "@/app/section-page";
 
 export async function generateMetadata({ params }: { params: Promise<{ section: string }> }) {
   const { section } = await params;
-  return { title: `${personalSections.find(s => s.id === section)?.label || "个人板块"} · 孙烁飞` };
+  return { title: `${personalSections.find(s => s.id === section)?.label || "个人板块"} · 日光之间` };
 }
 export default async function ExplorePage({ params, searchParams }: { params: Promise<{ section: string }>; searchParams: Promise<{ project?: string }> }) {
   const { section } = await params;
