@@ -15,7 +15,9 @@ const paths=[
  {id:"experience",title:"实习经历",description:"把课堂里的问题，带到真实工作中",number:"02"},
  {id:"research",title:"研究手记",description:"管理学、企业发展与人工智能",number:"03"},
  {id:"awards",title:"荣誉收藏",description:"一路积累的努力与回声",number:"04"},
- {id:"practice",title:"志愿实践",description:"走出自己的世界，认识更多的人",number:"05"}
+ {id:"practice",title:"志愿实践",description:"走出自己的世界，认识更多的人",number:"05"},
+ {id:"projects",title:"AI 实验室",description:"把想法，做成可以使用的作品",number:"06"},
+ {id:"notes",title:"随笔",description:"记下阅读、旅行和日常里的想法",number:"07"}
 ];
 
 export default function HomeScene({open,motionPaused=false}:{open:(id:string,project?:string)=>void;motionPaused?:boolean}){
@@ -74,6 +76,7 @@ export default function HomeScene({open,motionPaused=false}:{open:(id:string,pro
   }
   void setup();return()=>{cancelled=true;dispose();};
  },[]);
+ const renderJourneyLink=(p:typeof paths[number])=><button key={p.id} onClick={()=>open(p.id)}><span className="journey-number">{p.number}</span><span><strong>{p.title}</strong><span>{p.description}</span></span><ArrowUpRight size={23}/></button>;
  return <div className="home-scene" ref={root}>
   <section className="home-hero" aria-label="认识孙烁飞">
    <SkyScene paused={motionPaused}/>
@@ -109,7 +112,8 @@ export default function HomeScene({open,motionPaused=false}:{open:(id:string,pro
   </section>
   <section className="home-journey" id="journey">
    <div className="journey-copy"><span className="section-kicker"><UserRound size={17}/>不止一张简历</span><h2>几条不同的路，<br/>构成今天的我。</h2><p>学习、研究、工作与志愿实践，是我认识世界的几种方式。这里收集着一路走来的经历，也保留着下一步的可能。</p><button className="home-inline-link" onClick={()=>open("about")}>关于我 <ArrowUpRight size={18}/></button></div>
-   <div className="journey-links">{paths.map(p=><button key={p.id} onClick={()=>open(p.id)}><span className="journey-number">{p.number}</span><span><strong>{p.title}</strong><span>{p.description}</span></span><ArrowUpRight size={23}/></button>)}</div>
+   <nav className="journey-links journey-links-main" aria-label="求学、工作与研究经历">{paths.slice(0,5).map(renderJourneyLink)}</nav>
+   <nav className="journey-links journey-extra" aria-label="AI 作品与随笔">{paths.slice(5).map(renderJourneyLink)}</nav>
   </section>
   <section className="home-work" aria-labelledby="home-work-title">
    <header className="home-section-header"><div><span className="section-kicker"><FlaskConical size={17}/>AI 实验室</span><h2 id="home-work-title">把想法，做成作品。</h2></div><button className="home-inline-link" onClick={()=>open("projects")}>全部 6 个项目 <ArrowUpRight size={18}/></button></header>

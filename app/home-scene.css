@@ -93,6 +93,16 @@
 .menubar nav>a { padding: 8px 0; color: #203147; }
 .menubar nav>a:hover { color: #1760ee; }
 
+/* Seven destinations: five on the right, two below the introduction. */
+.journey-copy{grid-column:1;grid-row:1}
+.journey-links-main{grid-column:2;grid-row:1 / span 2}
+.journey-extra{grid-column:1;grid-row:2}
+@media(min-width:801px){.home-journey{row-gap:28px}}
+@media(max-width:800px){
+ .journey-extra{padding-top:0}
+ .journey-links-main>button:last-child{border-bottom:0}
+}
+
 /* Keep the desktop's introduction/portrait composition on narrow screens. */
 @media(max-width:800px){
  .home-hero{padding-left:5%;padding-right:5%;gap:26px}
