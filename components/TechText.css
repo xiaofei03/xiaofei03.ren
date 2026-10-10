@@ -1,0 +1,18 @@
+.tech-text {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.tech-text-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.tech-text-fallback{position:absolute;inset:0;display:flex;align-items:center;padding:0 32px;font:inherit;letter-spacing:inherit;white-space:nowrap}
+.tech-text[data-ready="true"] .tech-text-fallback{visibility:hidden}
+.tech-text:not([data-ready="true"]) .tech-text-canvas{visibility:hidden}

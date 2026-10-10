@@ -9,6 +9,7 @@ Elliot Hu 的个人桌面与拼贴风格是视觉参考。本项目是重新实�
 - 43 份原始材料预览：32 份获奖及荣誉证书、6 份志愿服务证明或感谢信、3 份聘书、2 项授权专利；支持分类、放大、双页证书翻页和原尺寸查看。
 - 可关闭、收起、放大的桌面窗口；电脑端支持拖动标题栏。
 - 独立随笔列表与文章页，分类筛选、搜索与基础 Markdown 排版。
+- 首页中文名字使用 React Bits Tech Text：虚线轮廓、选框、粒子、拖动回弹和自动扫过；沿用中文宋体与 Sofian Sun 英文签名。触屏与减少动态效果模式保持稳定文字，页面隐藏或文字离开视口时暂停。
 - 支持手机布局与减少动态效果设置。
 
 ## 写作工作室
@@ -57,3 +58,7 @@ node --import ./scripts/sites-env.mjs ./node_modules/wrangler/bin/wrangler.js d1
 ## 检查
 
 `npx tsc --noEmit --incremental false`，`npm run build`。已在真实浏览器检查桌面、手机、窗口、荣誉、随笔和编辑器；保存与文件字节读取、草稿隔离和写入权限有实际验证。WebMCP 工具只在支持 `document.modelContext` 的浏览器注册；当前环境没有该原生接口，无法验证原生注册。
+
+## 文字组件来源
+
+`components/TechText.tsx` 基于 [React Bits Tech Text](https://reactbits.dev/text-animations/tech-text)，上游提交 `d86fccbd477786f94ca7eb891fbe0ec039d3cd3b`。不新增运行依赖；本站增加中文自适应、语义标题与首帧文字回退、触屏滚动和动态效果偏好适配。许可证与版权声明保留在 `licenses/react-bits-LICENSE.md`（MIT + Commons Clause）。

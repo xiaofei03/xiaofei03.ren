@@ -2,6 +2,7 @@
 import {useEffect,useRef} from "react";
 import {ArrowDown,ArrowUpRight,BookOpen,ChevronRight,FlaskConical,Sparkles,UserRound} from "lucide-react";
 import {labProjects} from "./project-data";
+import TechText from "@/components/TechText";
 import "./home-scene.css";
 
 
@@ -93,7 +94,7 @@ export default function HomeScene({open}:{open:(id:string,project?:string)=>void
    <div className="hero-main"><div className="hero-left">
    <div className="hero-title">
     <p className="hero-greeting hero-title-line">你好，很高兴认识你。</p>
-    <div className="hero-name"><h1 className="hero-title-line">孙烁飞<span>Sofian Sun</span></h1></div>
+    <div className="hero-name"><h1 className="hero-title-line"><TechText text="孙烁飞" fontWeight={600} fontSize={150} fontFamily={'"Songti SC", "Noto Serif SC", "STSong", serif'} align="start" reveal="letter" dashLength={4} dashGap={2} specks={15} color="#17374c" accentColor="#315f85" letterSpacing={-0.05} reach={200} softness={0.7} strokeWidth={1.5} speed={1} lineStyle="dashed" selection labels draggable sweep/><span className="hero-roman">Sofian Sun</span></h1></div>
     <div className="hero-identity hero-title-line"><span>管理学 × AI</span><span>中国科学技术大学</span></div>
     <p className="hero-description hero-title-line">在数据里寻找答案，<br/>在生活里收集问题。</p>
     <div className="hero-primary-enter hero-title-line"><button className="hero-primary" onClick={()=>open("about")}>从这里认识我 <ArrowUpRight size={20}/></button></div>
