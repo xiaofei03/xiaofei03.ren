@@ -24,3 +24,5 @@
 .note-meta{color:#718174}.note-row p{color:#647567}.reading-time{color:#758679}.collection-count,.award-card-meta{color:#6c7d93}.editor-title-label>span,.editor-metadata label>span,.excerpt-label>span{color:#62758e}.editor-title::placeholder{color:#8c9db4}.import-area small{color:#657f9f}.editor-hint{color:#75899e}.editor-body::placeholder{color:#8396ae}.editor-status{color:#657991}
 @media(max-width:650px){.desktop-stage{height:760px}.portrait-object{top:49px;width:105px}.portrait-image{height:102px}.portrait-paper>.handwriting{font-size:11px}.award-object{top:55px;width:95px}.name-block{top:220px}.project-object{top:581px;width:112px;left:4%}.note-object{top:581px;width:112px;right:4%}.project-object .object-label,.note-object .object-label{font-size:10px;letter-spacing:0;margin-top:8px}}
 @media(max-width:650px) and (max-height:750px){.dock-area{position:relative}.desktop{padding-bottom:0}.desktop-stage{height:770px}}
+
+.journal-avatar{width:39px;height:39px;border-radius:50%;object-fit:cover;object-position:50% 22%;background:#e6e9ee}.article-byline img{object-position:50% 22%;background:#e6e9ee}

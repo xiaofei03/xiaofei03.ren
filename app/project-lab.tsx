@@ -20,8 +20,8 @@ export function ProjectCase({project:p,onBack}:{project:LabProject;onBack?:()=>v
  </article>;
 }
 
-export default function ProjectLab(){
- const [selected,setSelected]=useState<string|null>(null);
+export default function ProjectLab({initialProject}:{initialProject?:string}){
+ const [selected,setSelected]=useState<string|null>(initialProject||null);
  const [category,setCategory]=useState("全部");
  const root=useRef<HTMLDivElement>(null),scroll=useRef(0);
  const current=labProjects.find(p=>p.id===selected);
