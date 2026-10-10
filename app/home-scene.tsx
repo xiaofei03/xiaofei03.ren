@@ -33,9 +33,9 @@ export default function HomeScene({open,motionPaused=false}:{open:(id:string,pro
     if(reduce)return;
     const intro=gsap.timeline({defaults:{duration:.65,ease:"power3.out"}});
     intro.fromTo(".hero-title-line",{y:40,opacity:0},{y:0,opacity:1,stagger:.07},0)
-     .fromTo(".hero-figure.scene-enter",{y:45,opacity:0,rotation:3},{y:0,opacity:1,rotation:0},.12)
      .fromTo(".scene-object.scene-enter",{y:25,opacity:0},{y:0,opacity:1,stagger:.06},.18)
      .fromTo(".hero-footer",{opacity:0,y:12},{opacity:1,y:0},.3);
+    gsap.fromTo(".hero-figure.scene-enter",{yPercent:110,opacity:1,rotation:0},{yPercent:0,opacity:1,duration:3,ease:"sine.inOut",scrollTrigger:{trigger:host.querySelector(".portrait-stage"),start:"top 98%",once:true}});
     const name=host.querySelector<HTMLElement>(".hero-title")!;
     const figure=host.querySelector<HTMLElement>(".hero-figure .scene-depth")!;
     const orbit=host.querySelector<HTMLElement>(".orbit-wire")!;
@@ -56,7 +56,7 @@ export default function HomeScene({open,motionPaused=false}:{open:(id:string,pro
     const work=host.querySelector(".home-work")!;
     gsap.from(".home-project",{scrollTrigger:{trigger:work,start:"top 80%",once:true},y:28,opacity:0,stagger:.12,duration:.7,ease:"power3.out"});
     gsap.fromTo(".home-project-image",{clipPath:"inset(0% 0% 100% 0%)"},{scrollTrigger:{trigger:work,start:"top 80%",once:true},clipPath:"inset(0% 0% 0% 0%)",stagger:.12,duration:.9,ease:"power3.inOut"});
-    gsap.from(".journal-portrait",{scrollTrigger:{trigger:host.querySelector(".home-journal"),start:"top 82%",once:true},x:-35,rotation:-6,opacity:0,duration:.8,ease:"power3.out"});
+    gsap.fromTo(".journal-portrait-motion",{xPercent:-110,rotation:70,opacity:0,transformOrigin:"0% 100%"},{scrollTrigger:{trigger:host.querySelector(".journal-portrait"),start:"top 88%",once:true},xPercent:0,rotation:0,opacity:1,duration:2,ease:"sine.inOut"});
     gsap.fromTo(".journal-handwriting",{y:28,rotation:-8,opacity:0},{scrollTrigger:{trigger:host.querySelector(".home-journal"),start:"top 82%",once:true},y:0,rotation:0,opacity:1,delay:.25,duration:.75,ease:"back.out(1.25)"});
     if(!desktop||!matchMedia("(pointer:fine)").matches)return cleanupScroll;
     const drift=Array.from(host.querySelectorAll<HTMLElement>(".hero-figure .scene-drift"));
@@ -103,8 +103,8 @@ export default function HomeScene({open,motionPaused=false}:{open:(id:string,pro
    </div>
    </div><div className="hero-orbit">
 
-   <div className="hero-figure scene-enter"><div className="scene-depth"><div className="scene-drift"><button onClick={()=>open("about")} aria-label="查看关于孙烁飞"><img className="hero-person" src="/assets/home-v2/portrait-side.webp" alt="孙烁飞戴着帽子、手扶帽檐的侧脸插画" width={879} height={1000} fetchPriority="high"/><span className="hero-signature">好奇心，未完待续 <Sparkles size={16}/></span></button></div></div></div>
-   </div></div>
+   <div className="portrait-stage"><div className="hero-figure scene-enter"><div className="scene-depth"><div className="scene-drift"><button onClick={()=>open("about")} aria-label="查看关于孙烁飞"><img className="hero-person" src="/assets/home-v2/portrait-side.webp" alt="孙烁飞戴着帽子、手扶帽檐的侧脸插画" width={879} height={1000} fetchPriority="high"/><span className="hero-signature">好奇心，未完待续 <Sparkles size={16}/></span></button></div></div></div>
+   </div></div></div>
    <div className="hero-footer"><a className="scene-scroll-hint" href="#journey">往下，慢慢认识 <ArrowDown size={16}/></a></div>
   </section>
   <section className="home-journey" id="journey">
@@ -115,7 +115,7 @@ export default function HomeScene({open,motionPaused=false}:{open:(id:string,pro
    <header className="home-section-header"><div><span className="section-kicker"><FlaskConical size={17}/>AI 实验室</span><h2 id="home-work-title">把想法，做成作品。</h2></div><button className="home-inline-link" onClick={()=>open("projects")}>全部 6 个项目 <ArrowUpRight size={18}/></button></header>
    <div className="home-projects">{labProjects.slice(0,3).map(p=><button key={p.id} className="home-project" data-project={p.id} onClick={()=>open("projects",p.id)}><div className="home-project-image"><img src={p.cover} alt={`${p.name}工作流`} loading="lazy"/></div><div className="home-project-name"><h3>{p.name}</h3><ArrowUpRight size={22}/></div><p>{p.summary}</p></button>)}</div>
   </section>
-  <section className="home-journal" aria-labelledby="home-journal-title"><div className="journal-portrait"><img src="/assets/home-v2/avatar-front.webp" alt="孙烁飞的正面插画头像" width={581} height={640}/><span className="journal-handwriting">记录，也是一种探索。</span></div><div className="home-journal-copy"><span className="section-kicker"><BookOpen size={17}/>随笔</span><h2 id="home-journal-title">给生活和想法，<br/>留一点空白。</h2><p>研究之外，也想记下阅读、旅行和日常里那些值得停一停的瞬间。</p><a className="home-inline-link" href="/notes">翻翻我的随笔 <ChevronRight size={19}/></a></div></section>
+  <section className="home-journal" aria-labelledby="home-journal-title"><div className="journal-portrait"><div className="journal-portrait-motion"><img src="/assets/home-v2/avatar-front.webp" alt="孙烁飞的正面插画头像" width={581} height={640}/><span className="journal-handwriting">记录，也是一种探索。</span></div></div><div className="home-journal-copy"><span className="section-kicker"><BookOpen size={17}/>随笔</span><h2 id="home-journal-title">给生活和想法，<br/>留一点空白。</h2><p>研究之外，也想记下阅读、旅行和日常里那些值得停一停的瞬间。</p><a className="home-inline-link" href="/notes">翻翻我的随笔 <ChevronRight size={19}/></a></div></section>
   <footer className="home-page-footer"><span>孙烁飞 · 一张不断生长的桌面</span><a href="mailto:sunshuofei@mail.ustc.edu.cn">聊点有意思的 <ArrowUpRight size={16}/></a></footer>
  </div>;
 }

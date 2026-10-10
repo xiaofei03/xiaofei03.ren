@@ -1,27 +1,26 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
-import { UserRound, GraduationCap, Trophy, BriefcaseBusiness, FlaskConical, Cpu, HeartHandshake, NotebookPen, Mail, X, Maximize2 } from "lucide-react";
-import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
-import SectionView from "./views";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import Link from "@/components/SectionLink";
+import { Mail } from "lucide-react";
 import HomeScene from "./home-scene";
-import { SidebarProvider,Sidebar,SidebarContent,SidebarMenu,SidebarMenuItem,SidebarMenuButton } from "@/components/ui/sidebar";
-import { flushSync } from "react-dom";
-const apps=[{id:"about",label:"关于我",Icon:UserRound,color:"blue"},{id:"education",label:"求学时光",Icon:GraduationCap,color:"orange"},{id:"awards",label:"荣誉收藏",Icon:Trophy,color:"yellow"},{id:"experience",label:"实习经历",Icon:BriefcaseBusiness,color:"green"},{id:"research",label:"研究手记",Icon:FlaskConical,color:"purple"},{id:"projects",label:"AI 实验室",Icon:Cpu,color:"dark"},{id:"practice",label:"志愿实践",Icon:HeartHandshake,color:"pink"},{id:"notes",label:"随笔",Icon:NotebookPen,color:"paper"}];
-export default function Desktop(){
- const [active,setActive]=useState<string|null>(null);
- const [displaySection,setDisplaySection]=useState("about");
- const [initialProject,setInitialProject]=useState<string|undefined>(undefined);
- const [maximized,setMaximized]=useState(false);
- const [offset,setOffset]=useState({x:0,y:0});
- const drag=useRef<{x:number;y:number;ox:number;oy:number}|null>(null);
- const trigger=useRef<HTMLElement|null>(null);
- function openApp(id:string|null,project?:string){if(id){setDisplaySection(id);setInitialProject(id==="projects"?project:undefined);}if(id&&!active)trigger.current=document.activeElement as HTMLElement;setActive(id);setOffset({x:0,y:0});if(!id)setMaximized(false);history.replaceState(null,"",id?"#"+id:location.pathname);}
- useEffect(()=>{const id=location.hash.slice(1);if(apps.some(a=>a.id===id)){setDisplaySection(id);setActive(id);}},[]);
- useEffect(()=>{const context=(document as any).modelContext;if(!context?.registerTool)return;const lifecycle=new AbortController();try{Promise.resolve(context.registerTool({name:"open_personal_section",title:"打开个人板块",description:"打开桌面中的指定经历窗口。",inputSchema:{type:"object",properties:{section:{type:"string",enum:apps.map(a=>a.id)}},required:["section"],additionalProperties:false},annotations:{readOnlyHint:false},execute(input:any){if(!input||!apps.some(a=>a.id===input.section))throw new Error("无效的板块");flushSync(()=>{setDisplaySection(input.section);setInitialProject(undefined);setActive(input.section);});return {opened:input.section};}},{signal:lifecycle.signal})).catch(()=>{});}catch{}return()=>lifecycle.abort();},[]);
- const current=apps.find(a=>a.id===displaySection);
- return <main className="desktop">
-  <header className="menubar"><button className="brand" onClick={()=>{openApp(null);window.scrollTo({top:0,behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"instant":"smooth"});}}><span className="brand-mark">S.</span><b>烁飞的桌面</b></button><nav aria-label="主导航">{["about","research","projects","notes"].map(id=>{const a=apps.find(x=>x.id===id)!;return <button key={id} onClick={()=>openApp(id)}>{a.label}</button>})}</nav><div className="menu-right"><span>合肥，中国</span><a href="mailto:sunshuofei@mail.ustc.edu.cn" aria-label="给烁飞发邮件"><Mail size={17}/></a></div></header>
-  <HomeScene open={openApp} motionPaused={active!==null}/>
-  <Dialog open={!!active} onOpenChange={o=>!o&&openApp(null)}><DialogContent className={`desktop-window ${maximized?"maximized":""}`} style={{translate:maximized?"-50% -50%":`calc(-50% + ${offset.x}px) calc(-50% + ${offset.y}px)`,transform:"none"}} onCloseAutoFocus={e=>{e.preventDefault();trigger.current?.focus();}} showCloseButton={false}><div className="window-chrome" onPointerDown={e=>{if((e.target as HTMLElement).closest("button")||maximized||innerWidth<650)return;drag.current={x:e.clientX,y:e.clientY,ox:offset.x,oy:offset.y};e.currentTarget.setPointerCapture(e.pointerId);}} onPointerMove={e=>{if(!drag.current)return;const d=drag.current;setOffset({x:Math.max(-innerWidth*.15,Math.min(innerWidth*.15,d.ox+e.clientX-d.x)),y:Math.max(-70,Math.min(70,d.oy+e.clientY-d.y))});}} onPointerUp={()=>{drag.current=null;}}><div className="traffic-lights"><button className="red" aria-label="关闭窗口" onClick={()=>openApp(null)}><X size={10}/></button><button className="yellow" aria-label="收起窗口" onClick={()=>openApp(null)}/><button className="green" aria-label="切换窗口大小" onClick={()=>setMaximized(v=>!v)}/></div><DialogTitle>{current?.label}</DialogTitle><button className="window-maximize" aria-label="切换窗口大小" onClick={()=>setMaximized(v=>!v)}><Maximize2 size={14}/></button></div><DialogDescription className="sr-only">了解孙烁飞的经历与作品</DialogDescription><SidebarProvider className="window-body" style={{"--sidebar-width":"190px"} as React.CSSProperties}><Sidebar className="window-sidebar" collapsible="none"><SidebarContent><span className="sidebar-caption">我的空间</span><SidebarMenu className="window-menu">{apps.map(({id,label,Icon})=><SidebarMenuItem key={id}><SidebarMenuButton isActive={active===id} className={active===id?"selected":""} onClick={()=>openApp(id)}><Icon size={18}/><span>{label}</span></SidebarMenuButton></SidebarMenuItem>)}</SidebarMenu></SidebarContent></Sidebar><div className="window-content" key={displaySection}><SectionView section={displaySection} open={openApp} initialProject={initialProject}/></div></SidebarProvider></DialogContent></Dialog>
- </main>;
+import { personalSections, sectionHref } from "./section-navigation";
+import useSectionTools from "@/components/useSectionTools";
+
+export default function Desktop() {
+  const router = useRouter();
+  useSectionTools();
+  useEffect(() => {
+    const id = location.hash.slice(1);
+    // Preserve links from the earlier desktop-window edition.
+    if (personalSections.some(s => s.id === id)) router.replace(sectionHref(id));
+  }, [router]);
+  return <main className="desktop">
+    <header className="menubar">
+      <Link className="brand" href="/"><span className="brand-mark">S.</span><b>烁飞的桌面</b></Link>
+      <nav aria-label="主导航">{["about", "research", "projects", "notes"].map(id => <Link key={id} href={sectionHref(id)}>{personalSections.find(s => s.id === id)!.label}</Link>)}</nav>
+      <div className="menu-right"><span>合肥，中国</span><a href="mailto:sunshuofei@mail.ustc.edu.cn" aria-label="给烁飞发邮件"><Mail size={17}/></a></div>
+    </header>
+    <HomeScene open={(id, project) => router.push(sectionHref(id, project))}/>
+  </main>;
 }

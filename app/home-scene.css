@@ -84,3 +84,11 @@
 
 /* Leave room inside the canvas for selection handles without moving the heading. */
 .hero-name h1>.tech-text{height:1.5em;width:calc(100% + 64px);margin:-.2em -32px;font-family:inherit;letter-spacing:-.05em}
+.portrait-stage { clip-path: inset(-28px -36px -18px -36px); }
+.journal-portrait { clip-path: inset(-28px -28px -36px -28px); }
+.journal-portrait:before { content: none; }
+.journal-portrait-motion { position: relative; isolation: isolate; transform-origin: 0% 100%; }
+.journal-portrait-motion:before { content: ""; position: absolute; inset: 35px -24px 0; background: #d7dfeb; border-radius: 48% 48% 7px 7px; z-index: -1; }
+.journal-portrait-motion .journal-handwriting { bottom: -30px; }
+.menubar nav>a { padding: 8px 0; color: #203147; }
+.menubar nav>a:hover { color: #1760ee; }
