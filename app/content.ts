@@ -1,6 +1,17 @@
-export const education=[
- {year:"2025 — 2028",name:"中国科学技术大学",detail:"工商管理学 · 硕士在读",note:"预计 2028 年 6 月毕业",courses:["商业数据分析 · 90","中级计量经济学 · 92","大语言模型与文本大数据分析 · 95"],honors:"两次校级一等奖学金；2025—2026 学年优秀学生干部。"},
- {year:"2021 — 2025",name:"东北大学",detail:"秦皇岛分校 · 工商管理学学士",note:"2021 年 9 月入学，2025 年 6 月毕业",courses:["管理经济学 · 99","金融学 · 95","组织行为学 · 94","微观经济学 · 91"],honors:"十佳本科生、自强之星；两次国家奖学金、一次国家励志奖学金。"}
+type EducationEntry = {
+ year: string;
+ name: string;
+ detail: string;
+ note?: string;
+ honors?: string;
+ logo: string;
+ logoLayout?: "zhengding";
+};
+
+export const education: EducationEntry[]=[
+ {year:"2025 — 2028",name:"中国科学技术大学",detail:"工商管理学 · 硕士在读",note:"预计 2028 年 6 月毕业",logo:"/assets/ustc-seal.png",honors:"两次校级一等奖学金；2025—2026 学年优秀学生干部。"},
+ {year:"2021 — 2025",name:"东北大学",detail:"秦皇岛分校 · 工商管理学学士",note:"2021 年 9 月入学，2025 年 6 月毕业",logo:"/assets/schools/neu-seal.png",honors:"十佳本科生、自强之星；两次国家奖学金、一次国家励志奖学金。"},
+ {year:"2018 — 2021",name:"河北正定中学",detail:"高中 · 选科：物理、化学、生物",logo:"/assets/schools/zhengding-logo.png",logoLayout:"zhengding"}
 ];
 export const experience=[
  {date:"2025.03 — 2025.06",company:"京东",full:"北京京东世纪贸易有限公司",role:"HRBP 实习生",initial:"JD",color:"#e54b46",summary:"参与北京 O2O 组京东大药房的招聘支持，从候选人沟通到入职，接触完整的人才招聘流程。",stats:[{n:"54",label:"岗位需求"},{n:"44",label:"发放 offer"},{n:"31",label:"最终入职"}],points:["协助招聘与人才梯队建设，对接业务扩张中的人才画像和需求，参与内推运营与渠道优化。","覆盖地推、营业员、药师、执业药师和店长五类岗位，参与筛选、沟通、面试跟进、谈薪、录用、背调与入职。","累计推荐 184 份简历，面试通过 49 人；地推终面通过率约 36%，药房门店三个岗位约 26%。"]},

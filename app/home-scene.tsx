@@ -4,7 +4,7 @@ import {ArrowDown,ArrowUpRight,BookOpen,ChevronRight,FlaskConical,Sparkles,UserR
 import {labProjects} from "./project-data";
 import TechText from "@/components/TechText";
 import SkyScene from "@/components/SkyScene";
-import {MotionToggle,useMotionPreferences} from '@/components/MotionPreferences';
+import {useMotionPreferences} from '@/components/MotionPreferences';
 import "./home-scene.css";
 
 
@@ -12,7 +12,7 @@ const cordY=(x:number)=>174-1300*(Math.cosh((x-630)/1300)-1);
 const cordPath=Array.from({length:106},(_,i)=>{const x=i*12;return `${i?"L":"M"}${x} ${cordY(x).toFixed(3)}`;}).join(" ");
 
 const paths=[
- {id:"education",title:"求学时光",description:"从东北大学，到中国科学技术大学",number:"01"},
+ {id:"education",title:"求学时光",description:"从正定到秦皇岛，再到合肥",number:"01"},
  {id:"experience",title:"实习经历",description:"把课堂里的问题，带到真实工作中",number:"02"},
  {id:"research",title:"研究手记",description:"管理学、企业发展与人工智能",number:"03"},
  {id:"awards",title:"荣誉收藏",description:"一路积累的努力与回声",number:"04"},
@@ -21,10 +21,10 @@ const paths=[
  {id:"notes",title:"随笔",description:"记下阅读、旅行和日常里的想法",number:"07"}
 ];
 
-export default function HomeScene({open,motionPaused=false}:{open:(id:string,project?:string)=>void;motionPaused?:boolean}){
+export default function HomeScene({open}:{open:(id:string,project?:string)=>void}){
  const root=useRef<HTMLDivElement>(null);
  const {disabled}=useMotionPreferences();
- const paused=motionPaused||disabled;
+ const paused=disabled;
  const pausedRef=useRef(paused);
  pausedRef.current=paused;
  const controlRef=useRef<()=>void>(()=>{});
@@ -103,7 +103,7 @@ export default function HomeScene({open,motionPaused=false}:{open:(id:string,pro
   <section className="home-hero" aria-label="认识孙烁飞">
    <SkyScene paused={paused}/>
    <div className="scene-paper-grid" aria-hidden="true"/>
-   <div className="hero-topline"><span><Sparkles size={17}/>一个关于我，也关于好奇心的地方</span><MotionToggle/></div>
+   <div className="hero-topline"><span><Sparkles size={17}/>一个关于我，也关于好奇心的地方</span></div>
     <div className="orbit-wire"><svg className="scene-orbit-line" viewBox="0 0 1260 300" fill="none" aria-hidden="true">
      <defs><filter id="cord-shadow" x="-10%" y="-20%" width="120%" height="150%"><feDropShadow dx="0" dy="2" stdDeviation="1.7" floodColor="#24435c" floodOpacity=".24"/></filter></defs>
      <g filter="url(#cord-shadow)"><path d={cordPath} stroke="#8b7351" strokeWidth="5.5"/><path d={cordPath} stroke="#e2cdab" strokeWidth="4"/><path d={cordPath} stroke="#aa8d66" strokeWidth="3.5" strokeDasharray="1 4"/><path d={cordPath} stroke="#f0e1c8" strokeWidth=".8"/></g>

@@ -6,7 +6,6 @@ import { ArrowLeft, ChevronRight } from "lucide-react";
 import { personalSections, sectionHref } from "@/app/section-navigation";
 import useSectionTools from "./useSectionTools";
 import "./SectionShell.css";
-import {MotionToggle} from './MotionPreferences';
 
 export default function SectionShell({ children, active }: { children: ReactNode; active?: string }) {
   const pathname = usePathname();
@@ -26,7 +25,7 @@ export default function SectionShell({ children, active }: { children: ReactNode
       </nav>
     </aside>
     <div className="section-stage">
-      <header className="section-toolbar"><div><Link href="/" className="section-exit" aria-label="退出板块，回到首页"><ArrowLeft size={19}/><span className="exit-label">回到首页</span></Link><span className="section-breadcrumb">日光之间</span><ChevronRight size={14}/><strong>{section.label}</strong></div><div><span className="section-location">合肥，中国</span><MotionToggle/></div></header>
+      <header className="section-toolbar"><div><Link href="/" className="section-exit" aria-label="退出板块，回到首页"><ArrowLeft size={19}/><span className="exit-label">回到首页</span></Link><span className="section-breadcrumb">日光之间</span><ChevronRight size={14}/><strong>{section.label}</strong></div><span className="section-location">合肥，中国</span></header>
       <div className={`section-content window-content section-content-${section.id}`} key={pathname} id="section-content" tabIndex={-1}>{children}</div>
     </div>
   </div>;

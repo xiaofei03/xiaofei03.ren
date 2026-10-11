@@ -88,6 +88,22 @@
 .section-content .date-label, .section-content .meta { color: #526b80!important; }
 .section-content .role-tag { color: #286f5d; }
 .section-content h4 { color: #526b80; }
+.education-heading { display: flex; align-items: center; gap: 22px; }
+.education-heading>div { min-width: 0; }
+.education-heading .date-label { margin: 0 0 9px; }
+.school-seal {
+  display: block; flex: 0 0 76px; width: 76px; height: 76px; padding: 7px;
+  border: 1px solid #d9e4eb; border-radius: 50%; background: #fff;
+  box-shadow: 0 4px 14px #27445b08;
+}
+.school-seal-art { position: relative; display: block; width: 100%; height: 100%; overflow: hidden; }
+.school-seal img { display: block; width: 100%; height: 100%; object-fit: contain; }
+/* Show the unchanged official emblem within its original school wordmark. */
+.school-seal-zhengding img { position: absolute; max-width: none; width: 461.3%; height: 116.13%; left: -4.84%; top: -8.06%; }
+.education-highlights { margin-left: 98px; max-width: 730px; }
+.education-highlights h4 { margin: 20px 0 8px; }
+.education-highlights p { margin: 0; }
+.education-entry { padding-bottom: 46px; }
 .section-content .company-logo { font-size: 19px; font-weight: 700; }
 .section-content .research-entry>div:last-child, .section-content .practice-list article>div { min-width: 0; max-width: 900px; flex: 1; }
 .section-content .research-entry>div:last-child { max-width: 800px; }
@@ -123,6 +139,13 @@
   .section-content.window-content { min-height: calc(100svh - 62px); padding: 32px 23px 55px 64px; }
   .section-content h1 { font-size: 30px; }
   .section-content .about-header { gap: 23px; }
+  .education-heading { gap: 12px; align-items: flex-start; }
+  .school-seal { flex-basis: 52px; width: 52px; height: 52px; padding: 4px; margin-top: 3px; }
+  .education-heading .date-label { font-size: 11px!important; margin-bottom: 8px; }
+  .section-content .education-entry h3 { font-size: 22px; line-height: 1.5; margin-bottom: 12px; }
+  .education-highlights { margin-left: 0; }
+  .education-highlights p { font-size: 14px; }
+  .education-entry { padding-bottom: 36px; }
   .section-content-notes.window-content { padding: 0; }
   .section-content-notes .journal-page { min-height: 0; }
   .section-content-notes .journal-container { padding: 35px 23px 28px 64px; }
