@@ -44,6 +44,7 @@ export interface TechTextProps {
   draggable?: boolean;
   sweep?: boolean;
   speed?: number;
+  paused?: boolean;
   className?: string;
   style?: CSSProperties;
 }
@@ -105,6 +106,7 @@ const TechText = ({
   draggable = true,
   sweep = true,
   speed = 1,
+  paused = false,
   className = '',
   style
 }: TechTextProps) => {
@@ -135,7 +137,8 @@ const TechText = ({
       labels,
       draggable,
       sweep,
-      speed
+      speed,
+      paused
     };
     wakeRef.current();
   });
@@ -155,6 +158,8 @@ const TechText = ({
     let width = 1;
     let height = 1;
     let dpr = 1;
+    let cssFontSize = '';
+    let cssFontFamily = '';
     let raf = 0;
     let last = performance.now();
     let visible = true;
@@ -178,7 +183,7 @@ const TechText = ({
       wakeRef.current();
     };
 
-    const family = (s: Settings) => s.fontFamily || getComputedStyle(container).fontFamily || 'sans-serif';
+    const family = (s: Settings) => s.fontFamily || cssFontFamily || 'sans-serif';
     const fontFor = (s: Settings, size: number) => `${s.fontWeight} ${size}px ${family(s)}`;
 
     const setFont = (target: CanvasRenderingContext2D, s: Settings, size: number) => {
@@ -227,7 +232,7 @@ const TechText = ({
         s.fontWeight,
         s.align,
         s.fontSize,
-        getComputedStyle(container).fontSize,
+        cssFontSize,
         s.letterSpacing,
         s.color,
         s.dashLength,
@@ -247,7 +252,7 @@ const TechText = ({
       }
 
       const probe = scratchCtx;
-      const maxSize = Math.min(s.fontSize, parseFloat(getComputedStyle(container).fontSize) || s.fontSize);
+      const maxSize = Math.min(s.fontSize, parseFloat(cssFontSize) || s.fontSize);
       setFont(probe, s, maxSize);
       let m = probe.measureText(s.text);
       const fit = Math.min(
@@ -530,7 +535,12 @@ const TechText = ({
       last = now;
       const view = ensureLayout(s);
 
-      const sweeping = s.sweep && finePointer.matches && !reducedMotion && !pointer.inside && dragging < 0;
+      const staticMode = reducedMotion || s.paused;
+      if (staticMode) {
+        pointer.inside = false; dragging = -1; frame.alpha = presence = 0;
+        glyphs.forEach(g => { g.offset.x = g.offset.y = g.velocity.x = g.velocity.y = g.outline = 0; });
+      }
+      const sweeping = s.sweep && finePointer.matches && !staticMode && !pointer.inside && dragging < 0;
       if (sweeping) clock += dt * s.speed;
       pulse += dt;
       let targetX = pointer.x;
@@ -539,7 +549,7 @@ const TechText = ({
         targetX = view.left + (view.right - view.left) * (0.5 - 0.5 * Math.cos(clock * 0.45));
         targetY = view.top + (view.bottom - view.top) * (0.45 + 0.1 * Math.sin(clock * 0.8));
       }
-      const active = !reducedMotion && (pointer.inside || sweeping || dragging >= 0);
+      const active = !staticMode && (pointer.inside || sweeping || dragging >= 0);
       if (active && !placed) {
         lens.x = targetX;
         lens.y = targetY;
@@ -639,6 +649,7 @@ const TechText = ({
         Math.abs(presence - (s.reveal === 'area' && active && dragging < 0 ? 1 : 0)) > 0.002 ||
         (frame.alpha > 0.01 && frame.alpha < 0.99);
       if ((active || settling) && visible && pageVisible && alive) raf = requestAnimationFrame(tick);
+      canvas.dataset.running = String(!!raf);
     };
 
     const wake = () => {
@@ -649,6 +660,9 @@ const TechText = ({
     wakeRef.current = wake;
 
     const resize = () => {
+      const style = getComputedStyle(container);
+      cssFontSize = style.fontSize;
+      cssFontFamily = style.fontFamily;
       width = Math.max(1, container.clientWidth);
       height = Math.max(1, container.clientHeight);
       dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -664,7 +678,7 @@ const TechText = ({
       pointer.y = e.clientY - rect.top;
     };
     const onMove = (e: PointerEvent) => {
-      if (reducedMotion || e.pointerType === 'touch') return;
+      if (reducedMotion || settingsRef.current?.paused || e.pointerType === 'touch') return;
       locate(e);
       pointer.inside = true;
       wake();
@@ -675,7 +689,7 @@ const TechText = ({
       wake();
     };
     const onDown = (e: PointerEvent) => {
-      if (reducedMotion || e.pointerType === 'touch') return;
+      if (reducedMotion || settingsRef.current?.paused || e.pointerType === 'touch') return;
       locate(e);
       pointer.inside = true;
       const s = settingsRef.current;
@@ -719,7 +733,7 @@ const TechText = ({
     };
     const onVisibilityChange = () => {
       pageVisible = !document.hidden;
-      if (!pageVisible) { cancelAnimationFrame(raf); raf = 0; }
+      if (!pageVisible) { cancelAnimationFrame(raf); raf = 0; canvas.dataset.running = 'false'; }
       else wake();
     };
     motionQuery.addEventListener('change', onMotionChange);
@@ -729,7 +743,8 @@ const TechText = ({
     resizeObserver.observe(container);
     const intersectionObserver = new IntersectionObserver(([entry]) => {
       visible = entry.isIntersecting;
-      wake();
+      if (!visible) { cancelAnimationFrame(raf); raf = 0; canvas.dataset.running = 'false'; }
+      else wake();
     });
     intersectionObserver.observe(container);
     if (document.fonts) document.fonts.ready.then(refreshFonts, refreshFonts);

@@ -1,0 +1,11 @@
+[Unit]
+Description=Daily Sunlit backup at 03:20 China time
+
+[Timer]
+OnCalendar=*-*-* 03:20:00 Asia/Shanghai
+Persistent=true
+RandomizedDelaySec=300
+Unit=sunlit-backup.service
+
+[Install]
+WantedBy=timers.target

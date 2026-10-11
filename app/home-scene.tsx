@@ -4,6 +4,7 @@ import {ArrowDown,ArrowUpRight,BookOpen,ChevronRight,FlaskConical,Sparkles,UserR
 import {labProjects} from "./project-data";
 import TechText from "@/components/TechText";
 import SkyScene from "@/components/SkyScene";
+import {MotionToggle,useMotionPreferences} from '@/components/MotionPreferences';
 import "./home-scene.css";
 
 
@@ -22,6 +23,12 @@ const paths=[
 
 export default function HomeScene({open,motionPaused=false}:{open:(id:string,project?:string)=>void;motionPaused?:boolean}){
  const root=useRef<HTMLDivElement>(null);
+ const {disabled}=useMotionPreferences();
+ const paused=motionPaused||disabled;
+ const pausedRef=useRef(paused);
+ pausedRef.current=paused;
+ const controlRef=useRef<()=>void>(()=>{});
+ useEffect(()=>{controlRef.current();},[paused]);
  useEffect(()=>{
   let cancelled=false;let dispose=()=>{};
   async function setup(){
@@ -33,11 +40,14 @@ export default function HomeScene({open,motionPaused=false}:{open:(id:string,pro
    mm.add({desktop:"(min-width: 801px)",mobile:"(max-width: 800px)",reduce:"(prefers-reduced-motion: reduce)"},context=>{
     const {desktop,reduce}=context.conditions!;
     if(reduce)return;
-    const intro=gsap.timeline({defaults:{duration:.65,ease:"power3.out"}});
-    intro.fromTo(".hero-title-line",{y:40,opacity:0},{y:0,opacity:1,stagger:.07},0)
-     .fromTo(".scene-object.scene-enter",{y:25,opacity:0},{y:0,opacity:1,stagger:.06},.18)
-     .fromTo(".hero-footer",{opacity:0,y:12},{opacity:1,y:0},.3);
-    gsap.fromTo(".hero-figure.scene-enter",{yPercent:110,opacity:1,rotation:0},{yPercent:0,opacity:1,duration:3,ease:"sine.inOut",scrollTrigger:{trigger:host.querySelector(".portrait-stage"),start:"top 98%",once:true}});
+    const reveals:Array<{tween:ReturnType<typeof gsap.fromTo>;started:boolean}>=[];
+    // CSS owns the first entrance, so breakpoint changes never replay it.
+    const reveal=(selector:string,trigger:HTMLElement,duration:number,stagger=0)=>{
+     if(trigger.dataset.revealed==='true'||pausedRef.current)return;
+     const tween=gsap.fromTo(selector,{y:18,opacity:0},{y:0,opacity:1,stagger,duration,ease:"power3.out",paused:true});
+     const entry={tween,started:false};reveals.push(entry);
+     ScrollTrigger.create({trigger,start:"top 85%",once:true,onEnter:()=>{trigger.dataset.revealed='true';entry.started=true;if(pausedRef.current)tween.progress(1);else if(!document.hidden)tween.play();}});
+    };
     const name=host.querySelector<HTMLElement>(".hero-title")!;
     const figure=host.querySelector<HTMLElement>(".hero-figure .scene-depth")!;
     const orbit=host.querySelector<HTMLElement>(".orbit-wire")!;
@@ -45,42 +55,55 @@ export default function HomeScene({open,motionPaused=false}:{open:(id:string,pro
     const setFigureY=gsap.quickSetter(figure,"y","px"),setFigureScale=gsap.quickSetter(figure,"scale");
     const setOrbitY=gsap.quickSetter(orbit,"y","px");
     let scrollFrame=0;
-    const renderScroll=()=>{scrollFrame=0;const r=hero.getBoundingClientRect();const p=Math.max(0,Math.min(1,-r.top/r.height));setNameY(-60*p);setNameScale(1-.14*p);setFigureY((desktop?190:38)*p);setFigureScale(1-.3*p);setOrbitY(-32*p);};
+    let heroBounds=hero.getBoundingClientRect();
+    const renderScroll=()=>{scrollFrame=0;heroBounds=hero.getBoundingClientRect();if(pausedRef.current||document.hidden)return;const p=Math.max(0,Math.min(1,-heroBounds.top/heroBounds.height));setNameY(-60*p);setNameScale(1-.14*p);setFigureY((desktop?190:38)*p);setFigureScale(1-.3*p);setOrbitY(-32*p);};
     const requestScroll=()=>{if(!scrollFrame)scrollFrame=requestAnimationFrame(renderScroll);};
     window.addEventListener("scroll",requestScroll,{passive:true});window.addEventListener("resize",requestScroll);
     renderScroll();
-    const swing=(e:PointerEvent)=>{const entry=(e.target as HTMLElement).closest<HTMLElement>(".orbit-entry");if(!entry||entry.contains(e.relatedTarget as Node))return;const hanger=entry.querySelector(".orbit-hanger");gsap.killTweensOf(hanger);gsap.timeline().to(hanger,{rotation:-11,duration:.18,ease:"power2.out"}).to(hanger,{rotation:8,duration:.24,ease:"sine.inOut"}).to(hanger,{rotation:-4,duration:.23,ease:"sine.inOut"}).to(hanger,{rotation:0,duration:.38,ease:"power2.out"});};
+    const swing=context.add("swing",(e:PointerEvent)=>{if(pausedRef.current||document.hidden||e.pointerType==='touch')return;const entry=(e.target as HTMLElement).closest<HTMLElement>(".orbit-entry");if(!entry||entry.contains(e.relatedTarget as Node))return;const hanger=entry.querySelector(".orbit-hanger");gsap.killTweensOf(hanger);gsap.timeline().to(hanger,{rotation:-8,duration:.18,ease:"power2.out"}).to(hanger,{rotation:5,duration:.24,ease:"sine.inOut"}).to(hanger,{rotation:-2,duration:.23,ease:"sine.inOut"}).to(hanger,{rotation:0,duration:.38,ease:"power2.out"});}) as (event:PointerEvent)=>void;
     const keyboardSwing=(e:FocusEvent)=>swing(e as unknown as PointerEvent);
     hero.addEventListener("pointerover",swing);hero.addEventListener("focusin",keyboardSwing);
     const cleanupScroll=()=>{window.removeEventListener("scroll",requestScroll);window.removeEventListener("resize",requestScroll);if(scrollFrame)cancelAnimationFrame(scrollFrame);hero.removeEventListener("pointerover",swing);hero.removeEventListener("focusin",keyboardSwing);gsap.killTweensOf(host.querySelectorAll(".orbit-hanger"));gsap.set([name,figure,orbit],{clearProps:"transform"});};
     const journey=host.querySelector(".home-journey")!;
-    gsap.from(".journey-copy>*, .journey-links>button",{scrollTrigger:{trigger:journey,start:"top 82%",once:true},y:26,opacity:0,stagger:.07,duration:.7,ease:"power3.out"});
+    reveal(".journey-copy>*, .journey-links>button",journey as HTMLElement,.65,.04);
     const work=host.querySelector(".home-work")!;
-    gsap.from(".home-project",{scrollTrigger:{trigger:work,start:"top 80%",once:true},y:28,opacity:0,stagger:.12,duration:.7,ease:"power3.out"});
-    gsap.fromTo(".home-project-image",{clipPath:"inset(0% 0% 100% 0%)"},{scrollTrigger:{trigger:work,start:"top 80%",once:true},clipPath:"inset(0% 0% 0% 0%)",stagger:.12,duration:.9,ease:"power3.inOut"});
-    gsap.fromTo(".journal-portrait-motion",{opacity:0},{scrollTrigger:{trigger:host.querySelector(".journal-portrait"),start:"top 88%",once:true},opacity:1,duration:2,ease:"sine.inOut"});
-    if(!desktop||!matchMedia("(pointer:fine)").matches)return cleanupScroll;
+    reveal(".home-project",work as HTMLElement,.7,.1);
+    const journal=host.querySelector<HTMLElement>(".journal-portrait")!;
+    if(journal.dataset.revealed!=='true'&&!pausedRef.current){
+     const tween=gsap.fromTo(".journal-portrait-motion",{opacity:0},{opacity:1,duration:2,ease:"sine.inOut",paused:true});
+     const entry={tween,started:false};reveals.push(entry);
+     ScrollTrigger.create({trigger:journal,start:"top 88%",once:true,onEnter:()=>{journal.dataset.revealed='true';entry.started=true;if(pausedRef.current)tween.progress(1);else if(!document.hidden)tween.play();}});
+    }
     const drift=Array.from(host.querySelectorAll<HTMLElement>(".hero-figure .scene-drift"));
     const motions=drift.map((el,i)=>({x:gsap.quickTo(el,"x",{duration:.8,ease:"power3.out"}),y:gsap.quickTo(el,"y",{duration:.8,ease:"power3.out"}),weight:[11,-15,9,-10,13][i]||8}));
-    const move=(e:PointerEvent)=>{const r=hero.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;motions.forEach(m=>{m.x(x*m.weight*2);m.y(y*m.weight*2);});};
+    const move=(e:PointerEvent)=>{if(!desktop||e.pointerType!=='mouse'||pausedRef.current||document.hidden)return;const r=heroBounds,x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;motions.forEach(m=>{m.x(x*m.weight*2);m.y(y*m.weight*2);});};
     const leave=()=>motions.forEach(m=>{m.x(0);m.y(0);});
     hero.addEventListener("pointermove",move);hero.addEventListener("pointerleave",leave);
-    return()=>{cleanupScroll();hero.removeEventListener("pointermove",move);hero.removeEventListener("pointerleave",leave);};
+    const control=()=>{
+     reveals.forEach(({tween,started})=>{if(pausedRef.current)tween.progress(1).pause();else if(started&&tween.progress()<1)tween.paused(document.hidden);});
+     motions.forEach(m=>{m.x.tween.paused(pausedRef.current||document.hidden);m.y.tween.paused(pausedRef.current||document.hidden);});
+     if(pausedRef.current||document.hidden){gsap.killTweensOf(host.querySelectorAll(".orbit-hanger"));gsap.set(host.querySelectorAll(".orbit-hanger"),{rotation:0});}
+     if(pausedRef.current){gsap.set([name,figure,orbit,...drift],{clearProps:"transform"});}
+     else if(!document.hidden)requestScroll();
+    };
+    controlRef.current=control;
+    document.addEventListener('visibilitychange',control);control();
+    return()=>{controlRef.current=()=>{};document.removeEventListener('visibilitychange',control);cleanupScroll();hero.removeEventListener("pointermove",move);hero.removeEventListener("pointerleave",leave);};
    },host);
    dispose=()=>mm.revert();
    const refresh=()=>ScrollTrigger.refresh();
-   const images=Array.from(host.querySelectorAll("img"));
+   const images=Array.from(hero.querySelectorAll("img"));
    await Promise.all(images.map(img=>img.decode().catch(()=>{})));
    if(!cancelled)refresh();
   }
-  void setup();return()=>{cancelled=true;dispose();};
+  void setup().catch(()=>{if(root.current)root.current.dataset.motionFallback='true';});return()=>{cancelled=true;controlRef.current=()=>{};dispose();};
  },[]);
  const renderJourneyLink=(p:typeof paths[number])=><button key={p.id} onClick={()=>open(p.id)}><span className="journey-number">{p.number}</span><span><strong>{p.title}</strong><span>{p.description}</span></span><ArrowUpRight size={23}/></button>;
  return <div className="home-scene" ref={root}>
   <section className="home-hero" aria-label="认识孙烁飞">
-   <SkyScene paused={motionPaused}/>
+   <SkyScene paused={paused}/>
    <div className="scene-paper-grid" aria-hidden="true"/>
-   <div className="hero-topline"><span><Sparkles size={17}/>一个关于我，也关于好奇心的地方</span></div>
+   <div className="hero-topline"><span><Sparkles size={17}/>一个关于我，也关于好奇心的地方</span><MotionToggle/></div>
     <div className="orbit-wire"><svg className="scene-orbit-line" viewBox="0 0 1260 300" fill="none" aria-hidden="true">
      <defs><filter id="cord-shadow" x="-10%" y="-20%" width="120%" height="150%"><feDropShadow dx="0" dy="2" stdDeviation="1.7" floodColor="#24435c" floodOpacity=".24"/></filter></defs>
      <g filter="url(#cord-shadow)"><path d={cordPath} stroke="#8b7351" strokeWidth="5.5"/><path d={cordPath} stroke="#e2cdab" strokeWidth="4"/><path d={cordPath} stroke="#aa8d66" strokeWidth="3.5" strokeDasharray="1 4"/><path d={cordPath} stroke="#f0e1c8" strokeWidth=".8"/></g>
@@ -98,7 +121,7 @@ export default function HomeScene({open,motionPaused=false}:{open:(id:string,pro
    <div className="hero-main"><div className="hero-left">
    <div className="hero-title">
     <p className="hero-greeting hero-title-line">你好，很高兴认识你。</p>
-    <div className="hero-name"><h1 className="hero-title-line"><TechText text="孙烁飞" fontWeight={600} fontSize={150} fontFamily={'"Songti SC", "Noto Serif SC", "STSong", serif'} align="start" reveal="letter" dashLength={4} dashGap={2} specks={15} color="#17374c" accentColor="#315f85" letterSpacing={-0.05} reach={200} softness={0.7} strokeWidth={1.5} speed={1} lineStyle="dashed" selection labels draggable sweep/><span className="hero-roman">Sofian Sun</span></h1></div>
+    <div className="hero-name"><h1 className="hero-title-line"><TechText paused={paused} text="孙烁飞" fontWeight={600} fontSize={150} fontFamily={'"Songti SC", "Noto Serif SC", "STSong", serif'} align="start" reveal="letter" dashLength={4} dashGap={2} specks={15} color="#17374c" accentColor="#315f85" letterSpacing={-0.05} reach={200} softness={0.7} strokeWidth={1.5} speed={1} lineStyle="dashed" selection labels draggable sweep/><span className="hero-roman">Sofian Sun</span></h1></div>
     <div className="hero-identity hero-title-line"><span>管理学 × AI</span><span>中国科学技术大学</span></div>
     <p className="hero-description hero-title-line">在数据里寻找答案，<br/>在生活里收集问题。</p>
     <div className="hero-primary-enter hero-title-line"><button className="hero-primary" onClick={()=>open("about")}>从这里认识我 <ArrowUpRight size={20}/></button></div>

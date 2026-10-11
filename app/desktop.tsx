@@ -6,6 +6,7 @@ import { Mail } from "lucide-react";
 import HomeScene from "./home-scene";
 import { personalSections, sectionHref } from "./section-navigation";
 import useSectionTools from "@/components/useSectionTools";
+import ManageNotesLink from '@/components/ManageNotesLink';
 
 export default function Desktop() {
   const router = useRouter();
@@ -19,7 +20,7 @@ export default function Desktop() {
     <header className="menubar">
       <Link className="brand" href="/"><span className="brand-mark">S.</span><b>日光之间</b></Link>
       <nav aria-label="主导航">{["about", "research", "projects", "notes"].map(id => <Link key={id} href={sectionHref(id)}>{personalSections.find(s => s.id === id)!.label}</Link>)}</nav>
-      <div className="menu-right"><span>合肥，中国</span><a href="mailto:sunshuofei@mail.ustc.edu.cn" aria-label="给烁飞发邮件"><Mail size={17}/></a></div>
+      <div className="menu-right"><span>合肥，中国</span><ManageNotesLink compact/><a href="mailto:sunshuofei@mail.ustc.edu.cn" aria-label="给烁飞发邮件"><Mail size={17}/></a></div>
     </header>
     <HomeScene open={(id, project) => router.push(sectionHref(id, project))}/>
   </main>;

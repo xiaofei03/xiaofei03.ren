@@ -1,0 +1,18 @@
+[Unit]
+Description=Sunlit consistent database, upload and source backup
+After=sunlit-web.service
+
+[Service]
+Type=oneshot
+User=sunlit
+Group=sunlit
+EnvironmentFile=/etc/sunlit.env
+ExecStart=/usr/bin/python3 /opt/sunlit/current/deploy/backup.py
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+ReadWritePaths=/opt/sunlit/backups
+Nice=10
+MemoryMax=256M

@@ -3,6 +3,8 @@ import {useRef,useState} from "react";
 import {ArrowLeft,ArrowUpRight,ChevronRight,ExternalLink,GitBranch,LockKeyhole} from "lucide-react";
 import {labProjects,projectRepoUrl,projectEvidenceUrl,type LabProject} from "./project-data";
 import "./project-lab.css";
+import { useRouter } from 'next/navigation';
+import { sectionHref } from './section-navigation';
 
 export function ProjectCase({project:p,onBack}:{project:LabProject;onBack?:()=>void}){
  return <article className="lab-case" data-project={p.id}>
@@ -21,12 +23,13 @@ export function ProjectCase({project:p,onBack}:{project:LabProject;onBack?:()=>v
 }
 
 export default function ProjectLab({initialProject}:{initialProject?:string}){
+ const router=useRouter();
  const [selected,setSelected]=useState<string|null>(initialProject||null);
  const [category,setCategory]=useState("全部");
- const root=useRef<HTMLDivElement>(null),scroll=useRef(0);
+ const root=useRef<HTMLDivElement>(null);
  const current=labProjects.find(p=>p.id===selected);
- function show(id:string){scroll.current=window.scrollY;setSelected(id);window.scrollTo({top:0,behavior:"instant"});}
- function back(){setSelected(null);requestAnimationFrame(()=>{window.scrollTo({top:scroll.current,behavior:"instant"});});}
+ function show(id:string){router.push(sectionHref('projects',id));}
+ function back(){setSelected(null);router.push(sectionHref('projects'));}
  const visible=labProjects.filter(p=>category==="全部"||p.category===category);
  return <div className="project-lab" ref={root}>{current?<ProjectCase key={current.id} project={current} onBack={back}/>:<>
   <header className="lab-heading"><div><h1>让想法成为可用的东西。</h1><p>从研究到日常，把问题拆开，再用代码接起来。</p></div><a className="lab-github-link" href="https://github.com/xiaofei03" target="_blank" rel="noreferrer"><GitBranch size={16}/>GitHub<ArrowUpRight size={15}/></a></header>

@@ -1,0 +1,2 @@
+import './admin.css';
+export default function AdminLayout({children}:{children:React.ReactNode}){return <main className="admin-page"><section className="admin-story"><a className="admin-brand" href="/"><span className="brand-mark">S.</span>日光之间</a><p className="eyebrow">YOUR WRITING SPACE</p><h1>把生活和想法，<br/>慢慢写下来。</h1><p>这里是你的写作工作室。保存还没写完的草稿，<br/>在文字之间放进照片，再把准备好的文章分享出去。</p><footer>记录，也是一种探索。</footer></section>{children}</main>;}

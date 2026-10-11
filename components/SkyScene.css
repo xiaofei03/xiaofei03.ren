@@ -32,6 +32,11 @@
 .sky-cloud img { display: block; width: 100%; height: auto; user-select: none; }
 .sky-cloud-mirror { transform: scaleX(-1); }
 .sky-scene[data-running="true"] .sky-cloud { animation-play-state: running; }
+html[data-motion="off"] .sky-cloud-near { left: 10%; }
+html[data-motion="off"] .sky-cloud-far { left: 59%; }
+html[data-motion="off"] .sky-cloud-high { left: 79%; }
+html[data-motion="off"] .sky-cloud-wisp { left: 24%; }
+.home-hero[data-motion-active="false"] .scene-scroll-hint svg { animation-play-state: paused; }
 
 @keyframes sky-wind {
   from { transform: translate3d(0, 0, 0); }

@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Toaster } from "@/components/ui/sonner";
+import AppToaster from "@/components/AppToaster";
 import PointerAtmosphere from "@/components/PointerAtmosphere";
+import { MotionPreferences } from '@/components/MotionPreferences';
+import SiteRegistration from '@/components/SiteRegistration';
 
 export const metadata: Metadata = {
   title: "日光之间",
@@ -30,7 +32,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="zh-CN">
-      <body className="antialiased">{children}<PointerAtmosphere /><Toaster position="bottom-right"/></body>
+      <body className="antialiased"><MotionPreferences>{children}<SiteRegistration/><PointerAtmosphere /><AppToaster/></MotionPreferences></body>
     </html>
   );
 }

@@ -48,3 +48,20 @@ next-env.d.ts
 !.env.example
 
 /.dev.vars*
+
+# Independent article data, uploads and administrator credentials
+/.local-data/
+__pycache__/
+
+# Private keys, database snapshots and generated backup archives
+*.key
+*.p12
+*.pfx
+*.sqlite
+*.sqlite-*
+*.db
+*.db-*
+*.tar.gz
+*.zip
+*.tsbuildinfo
+/trash_pending_delete/

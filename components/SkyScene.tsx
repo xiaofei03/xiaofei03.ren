@@ -43,6 +43,7 @@ export default function SkyScene({ paused = false }: { paused?: boolean }) {
     const measure = () => { bounds = hero.getBoundingClientRect(); };
     const update = () => {
       layer.dataset.running = String(running());
+      hero.dataset.motionActive = String(running());
       if (!running() || !fine.matches) reset();
     };
     const observer = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; update(); });

@@ -2,12 +2,16 @@
 
 import { lazy, Suspense, useEffect, useState } from "react";
 import "./PointerAtmosphere.css";
+import {usePathname} from 'next/navigation';
+import {useMotionPreferences} from './MotionPreferences';
 
 const FluidCursor = lazy(() => import("./FluidCursor"));
 
 /** A single shared layer also covers portalled desktop windows and journal routes. */
 export default function PointerAtmosphere() {
   const [enabled, setEnabled] = useState(false);
+  const pathname=usePathname();
+  const {disabled}=useMotionPreferences();
   useEffect(() => {
     const reduce = matchMedia("(prefers-reduced-motion: reduce)");
     const fine = matchMedia("(any-hover: hover) and (any-pointer: fine)");
@@ -20,5 +24,5 @@ export default function PointerAtmosphere() {
       fine.removeEventListener("change", update);
     };
   }, []);
-  return enabled ? <Suspense fallback={null}><FluidCursor /></Suspense> : null;
+  return enabled&&!disabled&&!pathname?.startsWith('/studio')&&!pathname?.startsWith('/admin') ? <Suspense fallback={null}><FluidCursor /></Suspense> : null;
 }
