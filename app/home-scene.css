@@ -138,3 +138,66 @@
  .hero-description{font-size:15px}
  .hero-primary{font-size:14px;padding:12px 18px}
 }
+
+/* Brand and introduction share the sky; no separate homepage navigation bar. */
+.home-hero{min-height:100svh}
+.hero-topline{position:relative;z-index:5;justify-content:flex-start;align-items:center;min-height:44px;gap:clamp(36px,5vw,80px)}
+.hero-brand{min-height:44px;font-size:16px;color:#18374c;flex-shrink:0}
+.hero-brand .brand-mark{font-size:30px;color:#234e78}
+.hero-topline>.hero-tagline{padding-top:0;min-width:0}
+.hero-tagline svg{flex-shrink:0}
+@media(max-width:800px){
+ .home-hero{min-height:0}
+ .hero-topline{gap:18px;width:100%}
+ .hero-brand{font-size:13px;gap:8px}
+ .hero-brand .brand-mark{font-size:26px}
+ .hero-topline>.hero-tagline{padding-top:0;margin-left:0;max-width:230px;font-size:11px;line-height:1.7;gap:7px}
+}
+@media(max-width:420px){.hero-topline{gap:14px}.hero-topline>.hero-tagline{font-size:10px}}
+
+/* Complete scenes share the window; the browser owns scroll momentum and snapping. */
+@media(min-width:801px) and (min-height:600px){
+ html[data-home-snap="true"]{scroll-snap-type:y mandatory;scroll-behavior:smooth}
+ .home-scene>section{height:100svh;min-height:100svh;scroll-snap-align:start;scroll-snap-stop:always}
+ .home-hero{padding-top:20px;padding-bottom:42px;gap:12px}
+ .hero-main{padding-top:clamp(160px,25svh,265px);min-height:0}
+ .hero-orbit .hero-figure{width:84%;max-width:min(455px,48svh)}
+ .hero-name h1{font-size:clamp(74px,13svh,142px)}
+ .hero-name h1>.hero-roman{font-size:clamp(21px,3.2svh,28px);margin:8px 0 14px}
+ .hero-greeting{font-size:clamp(14px,2.2svh,19px);margin-bottom:10px}
+ .hero-identity{margin-bottom:14px;font-size:13px}
+ .hero-description{font-size:15px;line-height:1.7;margin-bottom:18px}
+ .home-journey,.home-work,.home-journal{max-width:none;padding:clamp(32px,6.5svh,76px) max(6%,calc((100vw - 1260px)/2))}
+ .home-journey{grid-template-columns:minmax(0,1fr) minmax(0,1.13fr);grid-template-rows:minmax(0,1fr) auto;column-gap:clamp(36px,6vw,110px);row-gap:24px;align-items:stretch}
+ .home-scene h2{font-size:clamp(32px,5.6svh,52px);line-height:1.35;margin-bottom:clamp(16px,2.6svh,28px)}
+ .section-kicker{margin-bottom:clamp(14px,2.8svh,25px)}
+ .journey-copy{align-self:start;min-width:0}
+ .journey-copy>p{max-width:440px;font-size:clamp(13px,1.9svh,16px);line-height:1.85;margin-bottom:clamp(16px,2.7svh,30px)}
+ .journey-links{padding-top:0;display:grid;min-width:0}
+ .journey-links-main{grid-template-rows:repeat(5,minmax(0,1fr))}
+ .journey-extra{grid-template-rows:repeat(2,minmax(0,1fr))}
+ .journey-links>button{min-height:0;padding:clamp(16px,2.8svh,28px) 0;gap:clamp(14px,1.7vw,24px)}
+ .journey-links strong{font-size:clamp(21px,3.2svh,28px)}
+ .journey-links>button>span:nth-child(2)>span{font-size:clamp(12px,1.8svh,14px);line-height:1.6}
+ .home-work{display:flex;flex-direction:column;justify-content:center;gap:clamp(24px,5svh,48px)}
+ .home-section-header{margin:0;flex-shrink:0}
+ .home-section-header h2{margin:0}
+ .home-projects{gap:clamp(18px,2.2vw,32px)}
+ .home-project-image{max-height:40svh}
+ .home-project-name{padding-top:clamp(14px,2.5svh,22px)}
+ .home-project-name h3{font-size:clamp(21px,3.2svh,27px)}
+ .home-project>p{font-size:clamp(12px,1.9svh,14px);line-height:1.8;margin-top:12px}
+ .home-journal{grid-template-rows:minmax(0,1fr) auto;column-gap:clamp(36px,6vw,80px);row-gap:24px}
+ .journal-portrait{width:100%;max-width:min(370px,48svh);margin:0 auto;padding:0 24px 30px}
+ .home-journal-copy>p{max-width:440px}
+ .home-page-footer{grid-column:1 / -1;width:100%;max-width:none;margin:0;padding:22px 0 0;align-self:end}
+}
+/* Content remains readable on phones, short windows and magnified layouts. */
+@media(max-width:800px), (max-height:599px){
+ .home-page-footer{width:100%;max-width:none;grid-column:1 / -1;margin:0;padding:24px 0 0}
+}
+@media(prefers-reduced-motion:reduce){html[data-home-snap="true"]{scroll-behavior:auto}}
+@media(min-width:801px) and (min-height:600px) and (max-height:699px){
+ .orbit-wire{height:190px;aspect-ratio:auto}
+ .hero-footer{left:50%;right:auto;translate:-50% 0}
+}

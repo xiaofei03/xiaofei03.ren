@@ -40,3 +40,16 @@ html[data-motion="off"] :is(.hero-title-line,.hero-figure,.scene-object,.hero-fo
 html[data-motion="off"] :is(.hero-title,.scene-depth,.scene-drift) { transform:none!important; }
 html[data-page-visible="false"] .home-scene *, html[data-page-visible="false"] .home-scene *::before, html[data-page-visible="false"] .home-scene *::after { animation-play-state:paused!important; }
 @media(max-width:800px){.hero-topline{gap:12px}}
+
+/* The journal's paper stamp is also its writing entrance. */
+.journal-write-link{cursor:pointer;transition:transform .2s,rotate .2s,background .2s,box-shadow .2s}
+.journal-write-link:hover{rotate:4deg;transform:translateY(-3px);background:#e8f0fc;box-shadow:6px 7px 0 #316fc114}
+.journal-write-link:focus-visible{outline:3px solid #316fc1;outline-offset:6px}
+@media(max-width:650px){
+ .journal-title{display:grid;grid-template-columns:minmax(0,1fr) 76px;column-gap:12px;padding-right:0}
+ .journal-title>*{grid-column:1 / -1}
+ .journal-title>.handwriting{grid-column:1;grid-row:1;font-size:25px;margin-bottom:20px}
+ .journal-title>.eyebrow{grid-column:1;grid-row:2}
+ .journal-title>.journal-write-link{display:grid;position:relative;right:auto;top:auto;grid-column:2;grid-row:1 / span 2;justify-self:end;align-self:start;width:68px;height:78px;font-size:17px;line-height:1.6;rotate:7deg;margin:3px 4px 0 0}
+ .journal-title>.journal-write-link:hover{rotate:3deg}
+}

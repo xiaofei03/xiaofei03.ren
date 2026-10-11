@@ -4,6 +4,7 @@ import {ArrowDown,ArrowUpRight,BookOpen,ChevronRight,FlaskConical,Sparkles,UserR
 import {labProjects} from "./project-data";
 import TechText from "@/components/TechText";
 import SkyScene from "@/components/SkyScene";
+import Link from "@/components/SectionLink";
 import {useMotionPreferences} from '@/components/MotionPreferences';
 import "./home-scene.css";
 
@@ -26,9 +27,8 @@ export default function HomeScene({open}:{open:(id:string,project?:string)=>void
  const {disabled}=useMotionPreferences();
  const paused=disabled;
  const pausedRef=useRef(paused);
- pausedRef.current=paused;
  const controlRef=useRef<()=>void>(()=>{});
- useEffect(()=>{controlRef.current();},[paused]);
+ useEffect(()=>{pausedRef.current=paused;controlRef.current();},[paused]);
  useEffect(()=>{
   let cancelled=false;let dispose=()=>{};
   async function setup(){
@@ -103,8 +103,8 @@ export default function HomeScene({open}:{open:(id:string,project?:string)=>void
   <section className="home-hero" aria-label="认识孙烁飞">
    <SkyScene paused={paused}/>
    <div className="scene-paper-grid" aria-hidden="true"/>
-   <div className="hero-topline"><span><Sparkles size={17}/>一个关于我，也关于好奇心的地方</span></div>
-    <div className="orbit-wire"><svg className="scene-orbit-line" viewBox="0 0 1260 300" fill="none" aria-hidden="true">
+   <div className="hero-topline"><Link className="brand hero-brand" href="/" aria-label="日光之间首页"><span className="brand-mark">S.</span><b>日光之间</b></Link><span className="hero-tagline"><Sparkles size={17}/>一个关于我，也关于好奇心的地方</span></div>
+    <div className="orbit-wire"><svg className="scene-orbit-line" viewBox="0 0 1260 300" preserveAspectRatio="none" fill="none" aria-hidden="true">
      <defs><filter id="cord-shadow" x="-10%" y="-20%" width="120%" height="150%"><feDropShadow dx="0" dy="2" stdDeviation="1.7" floodColor="#24435c" floodOpacity=".24"/></filter></defs>
      <g filter="url(#cord-shadow)"><path d={cordPath} stroke="#8b7351" strokeWidth="5.5"/><path d={cordPath} stroke="#e2cdab" strokeWidth="4"/><path d={cordPath} stroke="#aa8d66" strokeWidth="3.5" strokeDasharray="1 4"/><path d={cordPath} stroke="#f0e1c8" strokeWidth=".8"/></g>
     </svg><span className="cord-nail cord-nail-left" aria-hidden="true"/><span className="cord-nail cord-nail-right" aria-hidden="true"/>
@@ -137,11 +137,12 @@ export default function HomeScene({open}:{open:(id:string,project?:string)=>void
    <nav className="journey-links journey-links-main" aria-label="求学、工作与研究经历">{paths.slice(0,5).map(renderJourneyLink)}</nav>
    <nav className="journey-links journey-extra" aria-label="AI 作品与随笔">{paths.slice(5).map(renderJourneyLink)}</nav>
   </section>
-  <section className="home-work" aria-labelledby="home-work-title">
+  <section className="home-work" id="works" aria-labelledby="home-work-title">
    <header className="home-section-header"><div><span className="section-kicker"><FlaskConical size={17}/>AI 实验室</span><h2 id="home-work-title">把想法，做成作品。</h2></div><button className="home-inline-link" onClick={()=>open("projects")}>全部 6 个项目 <ArrowUpRight size={18}/></button></header>
    <div className="home-projects">{labProjects.slice(0,3).map(p=><button key={p.id} className="home-project" data-project={p.id} onClick={()=>open("projects",p.id)}><div className="home-project-image"><img src={p.cover} alt={`${p.name}工作流`} loading="lazy"/></div><div className="home-project-name"><h3>{p.name}</h3><ArrowUpRight size={22}/></div><p>{p.summary}</p></button>)}</div>
   </section>
-  <section className="home-journal" aria-labelledby="home-journal-title"><div className="journal-portrait"><div className="journal-portrait-motion"><img src="/assets/home-v2/avatar-front.webp" alt="孙烁飞的正面插画头像" width={581} height={640}/><span className="journal-handwriting">记录，也是一种探索。</span></div></div><div className="home-journal-copy"><span className="section-kicker"><BookOpen size={17}/>随笔</span><h2 id="home-journal-title">给生活和想法，<br/>留一点空白。</h2><p>研究之外，也想记下阅读、旅行和日常里那些值得停一停的瞬间。</p><a className="home-inline-link" href="/notes">翻翻我的随笔 <ChevronRight size={19}/></a></div></section>
+  <section className="home-journal" id="journal" aria-labelledby="home-journal-title"><div className="journal-portrait"><div className="journal-portrait-motion"><img src="/assets/home-v2/avatar-front.webp" alt="孙烁飞的正面插画头像" width={581} height={640}/><span className="journal-handwriting">记录，也是一种探索。</span></div></div><div className="home-journal-copy"><span className="section-kicker"><BookOpen size={17}/>随笔</span><h2 id="home-journal-title">给生活和想法，<br/>留一点空白。</h2><p>研究之外，也想记下阅读、旅行和日常里那些值得停一停的瞬间。</p><Link className="home-inline-link" href="/notes">翻翻我的随笔 <ChevronRight size={19}/></Link></div>
   <footer className="home-page-footer"><span>日光之间 · 记录好奇，慢慢生长</span><a href="mailto:sunshuofei@mail.ustc.edu.cn">聊点有意思的 <ArrowUpRight size={16}/></a></footer>
+  </section>
  </div>;
 }
