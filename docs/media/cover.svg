@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="310" viewBox="0 0 1440 310" role="img" aria-labelledby="title desc">
+  <title id="title">日光之间 · SUNLIT</title>
+  <desc id="desc">暖白纸面上的深蓝标题，右侧是一轮淡金色日光。记录经历、作品与好奇心。</desc>
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#f1f6f8"/><stop offset="1" stop-color="#fcf8f0"/>
+    </linearGradient>
+    <radialGradient id="sun">
+      <stop stop-color="#efd5a7"/><stop offset=".72" stop-color="#f4dfbd"/><stop offset="1" stop-color="#f7ead5"/>
+    </radialGradient>
+    <linearGradient id="sky" x1="0" y1="0" x2="1" y2="0">
+      <stop stop-color="#b7d5e8" stop-opacity=".15"/><stop offset="1" stop-color="#a7c9df" stop-opacity=".55"/>
+    </linearGradient>
+  </defs>
+  <rect width="1440" height="310" rx="12" fill="url(#paper)"/>
+  <g fill="none" stroke="#8dabb9" stroke-width="1" opacity=".28">
+    <path d="M850 310 Q1140 102 1440 185"/>
+    <path d="M964 310 Q1200 151 1440 227"/>
+    <path d="M1100 310 Q1270 230 1440 274"/>
+  </g>
+  <circle cx="1190" cy="131" r="77" fill="url(#sun)"/>
+  <circle cx="1190" cy="131" r="102" fill="none" stroke="#d6b78b" stroke-width="1" opacity=".35"/>
+  <path d="M1000 180 Q1175 137 1360 187 L1360 242 Q1202 208 1000 243Z" fill="url(#sky)"/>
+  <text x="76" y="53" fill="#506d7e" font-family="Georgia,serif" font-size="16" letter-spacing="4">SUNLIT / A PERSONAL SPACE</text>
+  <text x="70" y="169" fill="#1c3c50" font-family="Songti SC,Noto Serif CJK SC,Noto Serif SC,STSong,serif" font-size="88" font-weight="600" letter-spacing="10">日光之间</text>
+  <text x="77" y="224" fill="#536e7d" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="22" letter-spacing="2">在数据里寻找答案，在生活里收集问题。</text>
+  <path d="M77 259H581" stroke="#547788" stroke-width="1" opacity=".2"/>
+  <text x="77" y="286" fill="#637c89" font-family="Georgia,serif" font-size="13" letter-spacing="3">RESEARCH · BUILDING · NOTES</text>
+  <text x="1343" y="277" text-anchor="end" fill="#627b88" font-family="Georgia,serif" font-size="15" font-style="italic">Stay curious.</text>
+</svg>
