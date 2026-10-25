@@ -98,7 +98,7 @@ html[data-home-snap="relaxed"] { scroll-snap-type: y proximity; }
   .home-scene .hero-identity { font-size: 13px; }
   .home-scene .hero-description { font-size: 15px; margin-bottom: 15px; }
   .home-scene .hero-orbit .hero-figure { max-width: 350px; }
-  .home-scene .orbit-wire { top: 68px; height: 205px; }
+  .home-scene .orbit-wire { top: 68px; height: 205px; aspect-ratio: auto; }
   .home-scene .journey-copy>p { font-size: 15px; line-height: 1.85; }
   .home-scene .journey-links>button { padding: 15px 0; }
   .home-scene .journey-links>button>span:nth-child(2)>span { font-size: 14px; }
