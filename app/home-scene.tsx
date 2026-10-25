@@ -1,12 +1,14 @@
 "use client";
 import {useEffect,useRef} from "react";
 import {ArrowDown,ArrowUpRight,BookOpen,ChevronRight,FlaskConical,Sparkles,UserRound} from "lucide-react";
-import {labProjects} from "./project-data";
+import FeaturedProjects from "@/components/FeaturedProjects";
 import TechText from "@/components/TechText";
 import SkyScene from "@/components/SkyScene";
 import Link from "@/components/SectionLink";
+import {personalSections} from "./section-navigation";
 import {useMotionPreferences} from '@/components/MotionPreferences';
 import "./home-scene.css";
+import "./home-refinement.css";
 
 
 const cordY=(x:number)=>174-1300*(Math.cosh((x-630)/1300)-1);
@@ -67,7 +69,7 @@ export default function HomeScene({open}:{open:(id:string,project?:string)=>void
     const journey=host.querySelector(".home-journey")!;
     reveal(".journey-copy>*, .journey-links>button",journey as HTMLElement,.65,.04);
     const work=host.querySelector(".home-work")!;
-    reveal(".home-project",work as HTMLElement,.7,.1);
+    reveal(".featured-projects",work as HTMLElement,.7);
     const journal=host.querySelector<HTMLElement>(".journal-portrait")!;
     if(journal.dataset.revealed!=='true'&&!pausedRef.current){
      const tween=gsap.fromTo(".journal-portrait-motion",{opacity:0},{opacity:1,duration:2,ease:"sine.inOut",paused:true});
@@ -98,7 +100,7 @@ export default function HomeScene({open}:{open:(id:string,project?:string)=>void
   }
   void setup().catch(()=>{if(root.current)root.current.dataset.motionFallback='true';});return()=>{cancelled=true;controlRef.current=()=>{};dispose();};
  },[]);
- const renderJourneyLink=(p:typeof paths[number])=><button key={p.id} onClick={()=>open(p.id)}><span className="journey-number">{p.number}</span><span><strong>{p.title}</strong><span>{p.description}</span></span><ArrowUpRight size={23}/></button>;
+ const renderJourneyLink=(p:typeof paths[number])=><button key={p.id} onClick={()=>open(p.id)}><img className="journey-marker" src={personalSections.find(section=>section.id===p.id)?.image} width={32} height={32} alt="" loading="lazy"/><span><strong>{p.title}</strong><span>{p.description}</span></span><ArrowUpRight size={23}/></button>;
  return <div className="home-scene" ref={root}>
   <section className="home-hero" aria-label="认识孙烁飞">
    <SkyScene paused={paused}/>
@@ -121,7 +123,7 @@ export default function HomeScene({open}:{open:(id:string,project?:string)=>void
    <div className="hero-main"><div className="hero-left">
    <div className="hero-title">
     <p className="hero-greeting hero-title-line">你好，很高兴认识你。</p>
-    <div className="hero-name"><h1 className="hero-title-line"><TechText paused={paused} text="孙烁飞" fontWeight={600} fontSize={150} fontFamily={'"Songti SC", "Noto Serif SC", "STSong", serif'} align="start" reveal="letter" dashLength={4} dashGap={2} specks={15} color="#17374c" accentColor="#315f85" letterSpacing={-0.05} reach={200} softness={0.7} strokeWidth={1.5} speed={1} lineStyle="dashed" selection labels draggable sweep/><span className="hero-roman">Sofian Sun</span></h1></div>
+    <div className="hero-name"><h1 className="hero-title-line"><TechText paused={paused} text="孙烁飞" fontWeight={600} fontSize={150} fontFamily={'"Sunlit Serif", "Songti SC", "Noto Serif SC", serif'} align="start" reveal="letter" dashLength={4} dashGap={2} specks={8} color="#183b4e" accentColor="#507b97" letterSpacing={-0.03} reach={200} softness={0.7} strokeWidth={1.5} speed={1} lineStyle="dashed" selection labels={false} draggable={false} sweep={false}/><span className="hero-roman">Sofian Sun</span></h1></div>
     <div className="hero-identity hero-title-line"><span>管理学 × AI</span><span>中国科学技术大学</span></div>
     <p className="hero-description hero-title-line">在数据里寻找答案，<br/>在生活里收集问题。</p>
     <div className="hero-primary-enter hero-title-line"><button className="hero-primary" onClick={()=>open("about")}>从这里认识我 <ArrowUpRight size={20}/></button></div>
@@ -133,15 +135,15 @@ export default function HomeScene({open}:{open:(id:string,project?:string)=>void
    <div className="hero-footer"><a className="scene-scroll-hint" href="#journey">往下，慢慢认识 <ArrowDown size={16}/></a></div>
   </section>
   <section className="home-journey" id="journey">
-   <div className="journey-copy"><span className="section-kicker"><UserRound size={17}/>不止一张简历</span><h2>几条不同的路，<br/>构成今天的我。</h2><p>学习、研究、工作与志愿实践，是我认识世界的几种方式。这里收集着一路走来的经历，也保留着下一步的可能。</p><button className="home-inline-link" onClick={()=>open("about")}>关于我 <ArrowUpRight size={18}/></button></div>
+   <div className="journey-copy"><h2>几条不同的路，<br/>构成今天的我。</h2><p>学习、研究、工作与志愿实践，是我认识世界的几种方式。每一段经历，都留在这里。</p><button className="home-inline-link" onClick={()=>open("about")}><UserRound size={17}/>关于我 <ArrowUpRight size={18}/></button></div>
    <nav className="journey-links journey-links-main" aria-label="求学、工作与研究经历">{paths.slice(0,5).map(renderJourneyLink)}</nav>
    <nav className="journey-links journey-extra" aria-label="AI 作品与随笔">{paths.slice(5).map(renderJourneyLink)}</nav>
   </section>
   <section className="home-work" id="works" aria-labelledby="home-work-title">
-   <header className="home-section-header"><div><span className="section-kicker"><FlaskConical size={17}/>AI 实验室</span><h2 id="home-work-title">把想法，做成作品。</h2></div><button className="home-inline-link" onClick={()=>open("projects")}>全部 6 个项目 <ArrowUpRight size={18}/></button></header>
-   <div className="home-projects">{labProjects.slice(0,3).map(p=><button key={p.id} className="home-project" data-project={p.id} onClick={()=>open("projects",p.id)}><div className="home-project-image"><img src={p.cover} alt={`${p.name}工作流`} loading="lazy"/></div><div className="home-project-name"><h3>{p.name}</h3><ArrowUpRight size={22}/></div><p>{p.summary}</p></button>)}</div>
+   <header className="home-section-header"><h2 id="home-work-title">把想法，做成作品。</h2><button className="home-inline-link" onClick={()=>open("projects")}><FlaskConical size={17}/>全部 6 个项目 <ArrowUpRight size={18}/></button></header>
+   <FeaturedProjects open={open}/>
   </section>
-  <section className="home-journal" id="journal" aria-labelledby="home-journal-title"><div className="journal-portrait"><div className="journal-portrait-motion"><img src="/assets/home-v2/avatar-front.webp" alt="孙烁飞的正面插画头像" width={581} height={640}/><span className="journal-handwriting">记录，也是一种探索。</span></div></div><div className="home-journal-copy"><span className="section-kicker"><BookOpen size={17}/>随笔</span><h2 id="home-journal-title">给生活和想法，<br/>留一点空白。</h2><p>研究之外，也想记下阅读、旅行和日常里那些值得停一停的瞬间。</p><Link className="home-inline-link" href="/notes">翻翻我的随笔 <ChevronRight size={19}/></Link></div>
+  <section className="home-journal" id="journal" aria-labelledby="home-journal-title"><div className="journal-portrait"><div className="journal-portrait-motion"><img src="/assets/home-v2/avatar-front.webp" alt="孙烁飞的正面插画头像" width={581} height={640}/><span className="journal-handwriting">记录，也是一种探索。</span></div></div><div className="home-journal-copy"><h2 id="home-journal-title">给生活和想法，<br/>留一点空白。</h2><p>研究之外，也想记下阅读、旅行和日常里那些值得停一停的瞬间。</p><Link className="home-inline-link" href="/notes"><BookOpen size={17}/>翻翻我的随笔 <ChevronRight size={19}/></Link></div>
   <footer className="home-page-footer"><span>日光之间 · 记录好奇，慢慢生长</span><a href="mailto:sunshuofei@mail.ustc.edu.cn">聊点有意思的 <ArrowUpRight size={16}/></a></footer>
   </section>
  </div>;

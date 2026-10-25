@@ -1,0 +1,49 @@
+@import url('/fonts/sunlit-serif.css');
+
+/* Shared paper, ink and type across the personal collection. */
+:root {
+  --sun-ink: #183b4e;
+  --sun-muted: #496879;
+  --sun-paper: #f5f6f1;
+  --sun-sky: #d9e9f3;
+  --sun-accent: #87465b;
+  --sun-line: #294f6929;
+  --sun-font-display: "Sunlit Serif", "Songti SC", "Noto Serif SC", serif;
+  --sun-font-body: "PingFang SC", "Microsoft YaHei", sans-serif;
+  --sun-ease: cubic-bezier(.22, 1, .36, 1);
+}
+::selection { background: #bdd5e2; color: #183b4e; }
+html { scrollbar-color: #839eac #edf2f1; }
+body { font-family: var(--sun-font-body); }
+:where(a,button,input,textarea,select,[tabindex]):focus-visible {
+  outline: 2px solid #426b86;
+  outline-offset: 5px;
+}
+:where(input,textarea) { caret-color: var(--sun-accent); }
+:where(a) { text-underline-offset: .22em; }
+.journal-page { color: var(--sun-ink); background: var(--sun-paper); }
+.journal-container { max-width: 1050px; padding: 60px 48px 40px; }
+.journal-title { position: relative; padding: 18px 130px 36px 0; margin-bottom: 22px; }
+.journal-title h1 { font: 600 clamp(32px, 4vw, 52px)/1.45 var(--sun-font-display); letter-spacing: -.025em; margin: 0 0 18px; color: var(--sun-ink); }
+.journal-title>p { font-size: 16px; line-height: 1.9; color: var(--sun-muted); max-width: 35em; }
+.journal-title>.journal-write-link { top: 15px; color: var(--sun-accent); background: #faf7ef; border-color: #87465b40; font-family: var(--sun-font-display); box-shadow: 2px 5px 14px #6135480d; }
+.journal-page .note-row { padding: 32px 0; border-color: var(--sun-line); }
+.journal-page .note-row h3 { color: var(--sun-ink); font-family: var(--sun-font-display); font-size: 25px; }
+.journal-page .note-row p { color: var(--sun-muted); font-size: 15px; line-height: 1.9; }
+.journal-page .note-number { color: #668191; font-family: var(--sun-font-display); }
+.journal-page .note-meta,.journal-page .reading-time,.journal-footer { color: var(--sun-muted); }
+.journal-page .search-box { color: var(--sun-muted); }
+.journal-page .search-box input { font-size: 14px; }
+.journal-page .search-box input::placeholder { color: #5c7480; }
+.article-container>h1,.article-prose :is(h2,h3) { font-family: var(--sun-font-display); color: var(--sun-ink); }
+@media(max-width:650px) {
+  .journal-container { padding: 28px 18px 30px; }
+  .journal-title { display: grid; grid-template-columns: minmax(0,1fr) 64px; column-gap: 12px; padding: 0 0 20px; }
+  .journal-title>h1 { grid-column: 1; grid-row: 1; font-size: clamp(28px,6vw,34px); }
+  .journal-title>h1>span { display: block; white-space: nowrap; }
+  .section-content-notes .journal-title>h1 { font-size: clamp(25px,6.8vw,32px); line-height: 1.5; }
+  .journal-title>p { grid-column: 1 / -1; font-size: 15px; max-width: 28em; }
+  .journal-title>.journal-write-link { grid-column: 2; grid-row: 1; width: 60px; height: 70px; font-size: 16px; top: auto; margin-top: 0; }
+  .journal-page .note-row h3 { font-size: 22px; }
+  .journal-page .note-row { gap: 12px; }
+}

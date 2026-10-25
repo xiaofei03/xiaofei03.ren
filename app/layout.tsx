@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "./sunlit-design.css";
 import AppToaster from "@/components/AppToaster";
 import PointerAtmosphere from "@/components/PointerAtmosphere";
 import { MotionPreferences } from '@/components/MotionPreferences';
