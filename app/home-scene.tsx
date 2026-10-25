@@ -39,7 +39,7 @@ export default function HomeScene({open}:{open:(id:string,project?:string)=>void
    gsap.registerPlugin(ScrollTrigger);
    const host=root.current,hero=host.querySelector<HTMLElement>(".home-hero")!;
    const mm=gsap.matchMedia();
-   mm.add({desktop:"(min-width: 801px)",mobile:"(max-width: 800px)",reduce:"(prefers-reduced-motion: reduce)"},context=>{
+   mm.add({desktop:"(min-width: 801px) and (min-height: 501px)",mobile:"(max-width: 800px), (max-height: 500px)",reduce:"(prefers-reduced-motion: reduce)"},context=>{
     const {desktop,reduce}=context.conditions!;
     if(reduce)return;
     const reveals:Array<{tween:ReturnType<typeof gsap.fromTo>;started:boolean}>=[];
@@ -58,12 +58,12 @@ export default function HomeScene({open}:{open:(id:string,project?:string)=>void
     const setOrbitY=gsap.quickSetter(orbit,"y","px");
     let scrollFrame=0;
     let heroBounds=hero.getBoundingClientRect();
-    const renderScroll=()=>{scrollFrame=0;heroBounds=hero.getBoundingClientRect();if(pausedRef.current||document.hidden)return;const p=Math.max(0,Math.min(1,-heroBounds.top/heroBounds.height));setNameY(-60*p);setNameScale(1-.14*p);setFigureY((desktop?190:38)*p);setFigureScale(1-.3*p);setOrbitY(-32*p);};
+    const renderScroll=()=>{scrollFrame=0;heroBounds=hero.getBoundingClientRect();if(pausedRef.current||document.hidden)return;const p=desktop?Math.max(0,Math.min(1,-heroBounds.top/heroBounds.height)):0;setNameY(-60*p);setNameScale(1-.14*p);setFigureY(190*p);setFigureScale(1-.3*p);setOrbitY(-32*p);};
     const requestScroll=()=>{if(!scrollFrame)scrollFrame=requestAnimationFrame(renderScroll);};
     window.addEventListener("scroll",requestScroll,{passive:true});window.addEventListener("resize",requestScroll);
     renderScroll();
     const swing=context.add("swing",(e:PointerEvent)=>{if(pausedRef.current||document.hidden||e.pointerType==='touch')return;const entry=(e.target as HTMLElement).closest<HTMLElement>(".orbit-entry");if(!entry||entry.contains(e.relatedTarget as Node))return;const hanger=entry.querySelector(".orbit-hanger");gsap.killTweensOf(hanger);gsap.timeline().to(hanger,{rotation:-8,duration:.18,ease:"power2.out"}).to(hanger,{rotation:5,duration:.24,ease:"sine.inOut"}).to(hanger,{rotation:-2,duration:.23,ease:"sine.inOut"}).to(hanger,{rotation:0,duration:.38,ease:"power2.out"});}) as (event:PointerEvent)=>void;
-    const keyboardSwing=(e:FocusEvent)=>swing(e as unknown as PointerEvent);
+    const keyboardSwing=(e:FocusEvent)=>{if((e.target as HTMLElement).matches(':focus-visible'))swing(e as unknown as PointerEvent);};
     hero.addEventListener("pointerover",swing);hero.addEventListener("focusin",keyboardSwing);
     const cleanupScroll=()=>{window.removeEventListener("scroll",requestScroll);window.removeEventListener("resize",requestScroll);if(scrollFrame)cancelAnimationFrame(scrollFrame);hero.removeEventListener("pointerover",swing);hero.removeEventListener("focusin",keyboardSwing);gsap.killTweensOf(host.querySelectorAll(".orbit-hanger"));gsap.set([name,figure,orbit],{clearProps:"transform"});};
     const journey=host.querySelector(".home-journey")!;
