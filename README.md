@@ -90,6 +90,15 @@ AI 实验室收集从具体问题出发的项目。每个项目都有图文介�
   </tr>
 </table>
 
+<table>
+  <tr>
+    <td width="50%" align="center"><img src="docs/media/education-mobile.jpg" alt="手机求学时光：半藏圆球导航与校徽时间线" width="235" /><p><b>经历慢慢读，导航留在边缘。</b></p></td>
+    <td width="50%" align="center"><img src="docs/media/project-mobile.jpg" alt="手机 AI 项目详情：封面与正文按屏幕宽度排版" width="235" /><p><b>图片与文字，各有自己的空间。</b></p></td>
+  </tr>
+</table>
+
+证书在短横屏下采用左图右说明，保留完整图片和 44 px 操作区域。[查看横屏实拍](docs/media/certificate-landscape.jpg) · [内页手机端验收](docs/inner-mobile-qa.md)
+
 ## 在本地开始
 
 需要 **Node.js ≥ 22.13.0**，已在 Node.js 24.16.0 上验证。
@@ -135,6 +144,7 @@ npm run start -- --port 5183
 - [服务器部署](deploy/README.md)：目录约定、持久化、备份、域名和 HTTPS。
 - [展示素材来源](docs/media/README.md)：截图范围与演示数据说明。
 - [手机端验收记录](docs/mobile-qa.md)：视口、磁吸滚动、横屏与验证限制。
+- [内页手机端验收](docs/inner-mobile-qa.md)：七个板块、边缘圆球、证书和图文排版。
 
 </details>
 

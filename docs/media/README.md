@@ -37,3 +37,16 @@
 ## 2026-10-25 手机布局与磁吸修复
 
 `home-mobile.jpg` 更新为本轮正式域名 https://xiaofei03.ren/ 的真实浏览器截图，视口 390 × 844；展示左右姓名与人像、两排七个悬挂入口和完整主按钮。动态效果正常运行，未修改 DOM 或合成画面。上一张图已保存在项目 `work/mobile-quality-2026-10-25/before/docs/media/home-mobile.jpg`。其他图片继续沿用前述来源；详细验收范围见 [手机端验收记录](../mobile-qa.md)。
+
+
+## 2026-10-25 七个内页手机修复
+
+新增三张正式 HTTPS 网站的真实浏览器截图，未模拟 DOM、暂停动效或合成画面：
+
+| 文件 | 页面与视口 |
+| --- | --- |
+| education-mobile.jpg | /explore/education，390 × 844；展示圆球边缘导航、校徽及学习经历。 |
+| project-mobile.jpg | /explore/projects?project=wenxianqiao，390 × 844；展示实际项目详情与保留比例的配图。 |
+| certificate-landscape.jpg | /explore/awards，844 × 390；实际打开多页专利证书，展示横屏左图右说明。 |
+
+证书来源仍为网站已有公开素材；未引入新个人资料。浏览器检查范围和硬件限制见 [内页手机端验收](../inner-mobile-qa.md)。旧截图未删除。

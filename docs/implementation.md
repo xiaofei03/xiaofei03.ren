@@ -116,3 +116,6 @@ node scripts/migrate-legacy.mjs import --from /导出目录 --data /数据目录
 
 
 2026-10-25 手机端验证记录见 [mobile-qa.md](mobile-qa.md)，包括小屏长段内部滚动、四屏吸附、横屏和可视高度变化。
+
+
+2026-10-25 内页手机端修复与验证范围见 [inner-mobile-qa.md](inner-mobile-qa.md)。七个首页入口和关于页保留同一视觉系统，新增正文跳转偏移、输入类型感知的悬停、44 px 证书控件及短横屏双栏证书预览。

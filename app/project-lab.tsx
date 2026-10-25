@@ -12,7 +12,7 @@ export function ProjectCase({project:p,onBack}:{project:LabProject;onBack?:()=>v
   <header className="lab-case-heading"><img src={p.logo} alt=""/><div><span className="lab-category">{p.category}</span><h1>{p.name}</h1><p className="lab-english">{p.english}</p></div></header>
   <p className="lab-case-tagline">{p.tagline}</p>
   <p className="lab-case-summary">{p.summary}</p>
-  <figure className="lab-case-figure" style={{background:p.background}}><img src={p.cover} alt={`${p.name}：${p.coverCaption}`}/><figcaption>{p.coverCaption}</figcaption></figure>
+  <figure className="lab-case-figure" style={{background:p.background}}><img src={p.cover} width={1080} height={675} alt={`${p.name}：${p.coverCaption}`}/><figcaption>{p.coverCaption}</figcaption></figure>
   <section className="lab-case-section"><h3>从一个真实需求开始</h3><p>{p.problem}</p></section>
   <section className="lab-case-section"><h3>把流程做完整</h3><div className="lab-capabilities">{p.features.map(f=><div key={f.title}><h4>{f.title}</h4><p>{f.body}</p></div>)}</div></section>
   <section className="lab-case-section"><h3>藏在界面背后的工作</h3>{p.engineering.map(e=><div className="lab-engineering" key={e.title}><h4>{e.title}</h4><p>{e.body}</p></div>)}</section>
@@ -35,7 +35,7 @@ export default function ProjectLab({initialProject}:{initialProject?:string}){
   <header className="lab-heading"><div><h1>让想法成为可用的东西。</h1><p>从研究到日常，把问题拆开，再用代码接起来。</p></div><a className="lab-github-link" href="https://github.com/xiaofei03" target="_blank" rel="noreferrer"><GitBranch size={16}/>GitHub<ArrowUpRight size={15}/></a></header>
   <div className="lab-toolbar"><nav aria-label="项目分类">{["全部",...new Set(labProjects.map(p=>p.category))].map(c=><button key={c} className={category===c?"active":""} aria-pressed={category===c} onClick={()=>setCategory(c)}>{c}</button>)}</nav><span>{visible.length} 个项目</span></div>
   <div className="lab-grid">{visible.map((p,i)=><button className="lab-card" key={p.id} data-project={p.id} onClick={()=>show(p.id)} style={{"--lab-accent":p.accent,"--lab-background":p.background} as React.CSSProperties}>
-   <span className="lab-card-cover"><img src={p.cover} alt={p.coverCaption} loading={i<2?"eager":"lazy"}/><span className="lab-open"><ArrowUpRight size={19}/></span></span>
+   <span className="lab-card-cover"><img src={p.cover} width={1080} height={675} alt={p.coverCaption} loading={i<2?"eager":"lazy"}/><span className="lab-open"><ArrowUpRight size={19}/></span></span>
    <span className="lab-card-copy"><span className="lab-card-meta">{p.category}<span>{p.english}</span></span><strong>{p.name}</strong><span className="lab-card-summary">{p.summary}</span><span className="lab-card-bottom"><span>{p.stack.slice(0,2).join(" · ")}</span><span>探索项目<ChevronRight size={14}/></span></span></span>
   </button>)}</div>
  </>}</div>;

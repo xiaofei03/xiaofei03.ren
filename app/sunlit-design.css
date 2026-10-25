@@ -28,7 +28,7 @@ body { font-family: var(--sun-font-body); }
 .journal-title>p { font-size: 16px; line-height: 1.9; color: var(--sun-muted); max-width: 35em; }
 .journal-title>.journal-write-link { top: 15px; color: var(--sun-accent); background: #faf7ef; border-color: #87465b40; font-family: var(--sun-font-display); box-shadow: 2px 5px 14px #6135480d; }
 .journal-page .note-row { padding: 32px 0; border-color: var(--sun-line); }
-.journal-page .note-row h3 { color: var(--sun-ink); font-family: var(--sun-font-display); font-size: 25px; }
+.journal-page .note-row h3 { text-wrap: balance; color: var(--sun-ink); font-family: var(--sun-font-display); font-size: 25px; }
 .journal-page .note-row p { color: var(--sun-muted); font-size: 15px; line-height: 1.9; }
 .journal-page .note-number { color: #668191; font-family: var(--sun-font-display); }
 .journal-page .note-meta,.journal-page .reading-time,.journal-footer { color: var(--sun-muted); }
