@@ -21,7 +21,10 @@ export default function SectionShell({ children, active }: { children: ReactNode
       <aside className="section-rail" aria-label="个人板块导航">
         <nav className="section-categories" aria-label="分类导航">
           {personalSections.map(s => <Link key={s.id} href={sectionHref(s.id)} className={`section-category${section.id === s.id ? " is-current" : ""}`} aria-label={s.label} aria-current={section.id === s.id ? "page" : undefined} style={{ "--orb-color": s.color } as CSSProperties}>
-            <span className={`rail-object rail-object-${s.id}`}><img src={s.image} alt="" width={48} height={48}/></span>
+            <span className="rail-glass">
+              <span className="rail-specular" aria-hidden="true"/>
+              <span className={`rail-object rail-object-${s.id}`}><img src={s.image} alt="" width={48} height={48}/></span>
+            </span>
             <span className="rail-label" aria-hidden="true">{s.label}<ChevronRight size={13}/></span>
           </Link>)}
         </nav>

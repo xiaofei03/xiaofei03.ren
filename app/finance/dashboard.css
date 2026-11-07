@@ -1,0 +1,182 @@
+.section-content-finance.window-content {
+  max-width: 1180px;
+  padding-top: clamp(28px, 3vw, 42px);
+}
+.finance-masthead {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 28px 40px;
+  margin-bottom: 8px;
+}
+.finance-masthead h1 {
+  margin: 0 0 8px;
+  font-size: clamp(40px, 4.4vw, 58px);
+}
+.finance-masthead .section-intro { margin: 0; max-width: 36em; }
+.finance-masthead .finance-account { margin-top: 0; align-self: flex-start; }
+.finance-dashboard { display: grid; gap: 18px; }
+.dash-top, .dash-charts, .dash-previews { display: grid; gap: 18px; }
+.dash-top { grid-template-columns: minmax(0, 1.35fr) minmax(280px, .82fr); align-items: stretch; }
+.dash-charts { grid-template-columns: minmax(280px, .86fr) minmax(0, 1.14fr); }
+.dash-previews { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.dash-card, .dash-preview, .portfolio-card {
+  border: 1px solid color-mix(in srgb, var(--sun-ink) 12%, transparent);
+  background:
+    linear-gradient(180deg, #ffffffa8, #ffffff5c);
+  border-radius: 18px;
+  box-shadow: 0 10px 30px #24485d0c;
+}
+.dash-hero {
+  display: grid;
+  align-content: space-between;
+  gap: 22px;
+  min-height: 100%;
+  padding: 26px 28px 22px;
+}
+.dash-hero strong {
+  display: block;
+  margin: 8px 0 6px;
+  color: var(--sun-ink);
+  font: 500 clamp(40px, 4vw, 56px)/1.15 var(--sun-font-display);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -.03em;
+}
+.dash-hero > div > span:nth-of-type(2),
+.dash-hero .portfolio-overline + strong + span {
+  color: var(--sun-muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+.dash-account-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.dash-account-line li {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--sun-ink);
+  font-size: 13px;
+}
+.dash-account-line i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #b7c4c6;
+}
+.dash-account-line i.is-on { background: #4f8a74; }
+.dash-account-line span { color: var(--sun-muted); }
+.dash-hero-actions, .dash-preview-go { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; }
+.dash-hero .portfolio-error, .dash-hero .portfolio-notice { margin: 0; }
+.discipline-panel.is-card {
+  height: 100%;
+  margin: 0;
+  padding: 24px 24px 18px;
+  border: 1px solid color-mix(in srgb, var(--sun-ink) 12%, transparent);
+  border-radius: 18px;
+  background: linear-gradient(180deg, #ffffffa8, #ffffff5c);
+  box-shadow: 0 10px 30px #24485d0c;
+}
+.discipline-panel.is-card .discipline-entry { align-items: flex-start; }
+.discipline-card-body { margin-top: 18px; color: var(--sun-muted); font-size: 14px; line-height: 1.8; }
+.discipline-card-body p, .discipline-card-body ul { margin: 0; }
+.discipline-card-body ul { display: grid; gap: 10px; padding: 0; list-style: none; }
+.discipline-card-body li {
+  padding-left: 12px;
+  border-left: 2px solid #8eaaa4;
+  color: var(--sun-ink);
+}
+.dash-charts .portfolio-card { margin: 0; }
+.dash-span { grid-column: 1 / -1; }
+.dash-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  min-width: 0;
+  padding: 22px 22px 18px;
+  color: var(--sun-ink);
+  text-align: left;
+  transition: transform .25s var(--sun-ease, ease), background .2s;
+}
+.dash-preview-kicker {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 18px;
+  color: #527d80;
+  font: 16px var(--sun-font-display);
+}
+.dash-preview-kicker > span:last-child { color: #7b9297; }
+.dash-preview h2 { margin: 0 0 8px; font: 600 24px/1.45 var(--sun-font-display); }
+.dash-preview > p { margin: 0 0 16px; color: var(--sun-muted); font-size: 14px; line-height: 1.8; }
+.dash-preview-empty {
+  display: grid;
+  gap: 6px;
+  width: 100%;
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid var(--sun-line);
+}
+.dash-preview-empty strong { font: 500 15px/1.6 var(--sun-font-display); }
+.dash-preview-empty span, .dash-preview-go { color: var(--sun-muted); font-size: 12px; line-height: 1.7; }
+.dash-preview-go { margin-top: 14px; }
+.dash-preview-macro .finance-macro-fields { width: 100%; margin-top: auto; }
+.dash-lead { max-width: 46em; margin: 0 0 18px; color: var(--sun-muted); font-size: 14px; line-height: 1.85; }
+.portfolio-records .portfolio-summary {
+  margin-bottom: 18px;
+  padding: 22px 24px;
+  border: 1px solid color-mix(in srgb, var(--sun-ink) 12%, transparent);
+  border-radius: 18px;
+  background: #ffffff70;
+}
+.portfolio-records .portfolio-accounts,
+.portfolio-records .portfolio-holdings,
+.portfolio-records .portfolio-transactions { margin-top: 8px; }
+.finance-tabs { margin-top: 18px; }
+.finance-login-layer .admin-remember {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: var(--sun-muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+.finance-login-layer .admin-remember input { width: 16px; height: 16px; margin-top: 3px; }
+.finance-login-layer .admin-remember small { display: block; color: #718690; font-size: 11px; }
+.finance-login-layer .admin-card h2 { font-family: var(--sun-font-display); }
+@media (hover: hover) and (pointer: fine) {
+  .dash-preview:hover { background: #ffffffc4; transform: translateY(-3px); }
+}
+@media (max-width: 980px) {
+  .dash-top, .dash-charts, .dash-previews { grid-template-columns: 1fr; }
+  .finance-masthead { align-items: flex-start; flex-direction: column; gap: 18px; }
+}
+@media (max-width: 800px) {
+  .dash-hero, .discipline-panel.is-card, .dash-preview { padding: 20px 18px; }
+  .dash-hero strong { font-size: 38px; }
+  .dash-preview h2 { font-size: 22px; }
+  .portfolio-records .portfolio-summary { padding: 18px 16px; }
+  .section-content-finance .finance-tab-list[data-slot="tabs-list"] {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 16px;
+    margin-bottom: 22px;
+  }
+  .section-content-finance .finance-tab-list [data-slot="tabs-trigger"] {
+    flex: 0 0 auto;
+    justify-content: flex-start;
+    min-width: 0;
+    padding: 10px 0 12px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dash-preview, .rail-glass { transition: none; }
+  .dash-preview:hover { transform: none; }
+}

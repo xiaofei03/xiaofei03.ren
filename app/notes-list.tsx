@@ -7,7 +7,7 @@ import type { Post } from "./seed-posts";
 export default function NotesList({compact=false}:{compact?:boolean}){
  const [posts,setPosts]=useState<Post[]>([]),[loading,setLoading]=useState(true),[error,setError]=useState(false),[category,setCategory]=useState("全部"),[query,setQuery]=useState("");
  async function reload(){setLoading(true);setError(false);try{const r=await fetch('/api/posts');if(!r.ok)throw new Error();const d=await r.json() as {posts:Post[]};setPosts(d.posts);}catch{setError(true);}finally{setLoading(false);}}
- useEffect(()=>{void reload();},[]);
+ useEffect(()=>{let ignore=false;void (async()=>{try{const r=await fetch('/api/posts');if(!r.ok)throw new Error();const d=await r.json() as {posts:Post[]};if(!ignore)setPosts(d.posts);}catch{if(!ignore)setError(true);}finally{if(!ignore)setLoading(false);}})();return()=>{ignore=true;};},[]);
  const filtered=posts.filter(p=>(category==='全部'||category===p.category)&&(!query||`${p.title} ${p.excerpt}`.toLowerCase().includes(query.toLowerCase())));
  return <div className={`notes-list ${compact?'compact':''}`}>
  {!compact&&<div className="notes-toolbar"><Tabs value={category} onValueChange={setCategory}><TabsList variant="line">{['全部','生活','研究','AI 与工具','阅读'].map(c=><TabsTrigger key={c} value={c}>{c}</TabsTrigger>)}</TabsList></Tabs><label className="search-box"><Search size={17}/><input type="search" placeholder="找一篇文章" aria-label="搜索随笔" value={query} onChange={e=>setQuery(e.target.value)}/></label></div>}

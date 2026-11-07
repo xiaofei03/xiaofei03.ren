@@ -6,7 +6,7 @@ import { personalSections, sectionHref } from "@/app/section-navigation";
 export default function useSectionTools() {
   const router = useRouter();
   useEffect(() => {
-    const context = (document as any).modelContext;
+    const context = (document as Document & { modelContext?: { registerTool?: (tool: object, options: { signal: AbortSignal }) => Promise<unknown> | unknown } }).modelContext;
     if (!context?.registerTool) return;
     const lifecycle = new AbortController();
     try {
