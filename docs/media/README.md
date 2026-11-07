@@ -50,3 +50,16 @@
 | certificate-landscape.jpg | /explore/awards，844 × 390；实际打开多页专利证书，展示横屏左图右说明。 |
 
 证书来源仍为网站已有公开素材；未引入新个人资料。浏览器检查范围和硬件限制见 [内页手机端验收](../inner-mobile-qa.md)。旧截图未删除。
+
+## 2026-11-07 玻璃侧栏
+
+以下截图来自 [正式站](https://xiaofei03.ren/) 的公开页面。截图使用未登录的 Chrome 会话和减少动态效果设置，保留实际视口画面并转换为 JPEG。
+
+| 文件 | 页面 | 实际视口 |
+| --- | --- | --- |
+| `sidebar-desktop.jpg` | `/explore/about` | 1365 × 840 |
+| `sidebar-mobile.jpg` | `/explore/about` | 390 × 844 |
+| `sidebar-landscape.jpg` | `/explore/education` | 844 × 390 |
+| `ai-lab-sidebar.jpg` | `/explore/projects` | 1365 × 900 |
+| `notes-sidebar.jpg` | `/notes`，使用页面公开的初始样例文章 | 1365 × 900 |
+| `project-mobile-sidebar.jpg` | `/explore/projects?project=wenxianqiao` | 390 × 844 |
