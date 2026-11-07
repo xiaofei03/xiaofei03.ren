@@ -7,11 +7,13 @@ export const personalSections = [
   { id: "projects", label: "AI 实验室", image: "/assets/home-v2/chatgpt-mark.svg", color: "#398e98" },
   { id: "practice", label: "志愿实践", image: "/assets/home-v2/practice-care.webp", color: "#b85d78" },
   { id: "notes", label: "随笔", image: "/assets/notebook-cobalt.webp", color: "#5c79c5" },
+  { id: "finance", label: "投资理财", image: "/assets/home-v2/finance-growth.webp", color: "#8971b9" },
 ] as const;
 
 export type PersonalSection = (typeof personalSections)[number]["id"];
 export function sectionHref(id: string, project?: string) {
   if (id === "notes") return "/notes";
+  if (id === "finance") return "/finance";
   const section = personalSections.some(s => s.id === id) ? id : "about";
   return `/explore/${section}${section === "projects" && project ? `?project=${encodeURIComponent(project)}` : ""}`;
 }
