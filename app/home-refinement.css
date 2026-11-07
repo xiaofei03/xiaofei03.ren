@@ -163,6 +163,7 @@ html[data-home-snap="off"] { scroll-snap-type: none; scroll-behavior: auto; }
   .home-scene .orbit-entry.scene-trophy img { height: 49px; }
   .home-scene .orbit-entry.scene-school img { width: 44px; height: 44px; }
   .home-scene .orbit-entry.scene-notebook img { width: 47px; height: 47px; }
+  .home-scene .orbit-entry.scene-finance img { width: 44px; height: 44px; }
   .home-scene .orbit-entry .scene-ai-mark { width: 47px; border-radius: 13px; }
   .home-scene .orbit-entry .scene-ai-mark img { width: 39px; height: 39px; }
   .home-scene .orbit-entry button { min-height: 70px; }
@@ -210,9 +211,8 @@ html[data-home-snap="off"] { scroll-snap-type: none; scroll-behavior: auto; }
   .home-scene .home-hero { padding-top: 16px; padding-bottom: 36px; gap: 12px; }
   .home-scene .mobile-cord-row { height: 20px; }
   .home-scene .orbit-entry { top: 5.13px; }
-  .home-scene .orbit-entry:nth-child(2),.home-scene .orbit-entry:nth-child(3) { top: 9.09px; }
-  .home-scene .orbit-entry:nth-child(n+5) { top: 6.07px; }
-  .home-scene .orbit-entry:nth-child(6) { top: 9.58px; }
+  .home-scene .orbit-entry:nth-child(2),.home-scene .orbit-entry:nth-child(3),
+  .home-scene .orbit-entry:nth-child(6),.home-scene .orbit-entry:nth-child(7) { top: 9.09px; }
   .home-scene .orbit-hanger { padding-top: 10px; }
   .home-scene .orbit-hanger:before { height: 13px; }
   .home-scene .orbit-entry button { min-height: 66px; }
@@ -220,6 +220,7 @@ html[data-home-snap="off"] { scroll-snap-type: none; scroll-behavior: auto; }
   .home-scene .orbit-entry.scene-trophy img { height: 45px; }
   .home-scene .orbit-entry.scene-school img { width: 40px; height: 40px; }
   .home-scene .orbit-entry.scene-notebook img { width: 42px; height: 42px; }
+  .home-scene .orbit-entry.scene-finance img { width: 40px; height: 40px; }
   .home-scene .orbit-entry .scene-ai-mark { width: 43px; }
   .home-scene .orbit-entry .scene-ai-mark img { width: 36px; height: 36px; }
   .home-scene .hero-greeting { margin-bottom: 4px; }
